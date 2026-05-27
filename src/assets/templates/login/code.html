@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Heritage of Cameroon - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700;800&amp;family=Manrope:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#1a1c16",
+                        "on-secondary-fixed-variant": "#920703",
+                        "tertiary": "#b0d9b0",
+                        "secondary-fixed": "#ffdad4",
+                        "primary-container": "#d4af37",
+                        "background": "#12140e",
+                        "outline-variant": "#4d4635",
+                        "outline": "#99907c",
+                        "inverse-primary": "#735c00",
+                        "on-background": "#e3e3d9",
+                        "on-secondary-fixed": "#410000",
+                        "on-primary": "#3c2f00",
+                        "on-error": "#690005",
+                        "surface-bright": "#383a33",
+                        "surface": "#12140e",
+                        "on-tertiary": "#13371b",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-tint": "#e9c349",
+                        "inverse-on-surface": "#2f312a",
+                        "secondary": "#ffb4a8",
+                        "on-tertiary-fixed-variant": "#2b4e30",
+                        "tertiary-fixed": "#c3edc3",
+                        "tertiary-container": "#95bd96",
+                        "surface-variant": "#34362e",
+                        "tertiary-fixed-dim": "#a8d1a9",
+                        "on-secondary-container": "#ff9a8a",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#690000",
+                        "surface-container-lowest": "#0d0f09",
+                        "secondary-fixed-dim": "#ffb4a8",
+                        "inverse-surface": "#e3e3d9",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-tertiary-fixed": "#002109",
+                        "surface-dim": "#12140e",
+                        "on-surface": "#e3e3d9",
+                        "surface-container-high": "#292b24",
+                        "secondary-container": "#920703",
+                        "primary-fixed": "#ffe088",
+                        "surface-container": "#1e201a",
+                        "primary": "#f2ca50",
+                        "on-primary-container": "#554300",
+                        "surface-container-highest": "#34362e",
+                        "on-tertiary-container": "#294d2e",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#241a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Public Sans", "serif"],
+                        "display": ["Public Sans"],
+                        "body": ["Manrope"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.text-gold-serif {
+    font-family: "Public Sans", serif;
+    font-weight: 800
+    }
+.bg-login-overlay {
+    background-image: linear-gradient(to bottom, rgba(18, 20, 14, 0.7), rgba(18, 20, 14, 0.95)), url(https://lh3.googleusercontent.com/aida/ADBb0ugOQh-uo_kGlmxr_FluiIeN_WqMCJ65i09gJbFNNi5TidBRjvDS6bDEV_sTrD37VN2K5eXnDs4mIj6scRBnZOIEtyJSGgacOk-wdzXH4p3cJWDjab1MOzosN1mVF2Xv3YNFI2iDScHr_Z3f_No5fA7P2atIbjJOdLbdCS8tsjKmgxSY_NJk3azy5YYtdTor-x6ZALKsmTYbzOmPFbpBq4wM8oEFA6YPmgtaifrqysqsZZDABntg9Jb-kGE);
+    background-size: cover;
+    background-position: center
+    }</style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col">
+<!-- Login Screen Container -->
+<main class="relative flex-grow flex flex-col items-center justify-between min-h-screen bg-login-overlay p-8 sm:p-12 overflow-hidden" data-alt="An atmospheric and high-end mobile application login screen. The background features a deeply shadowed, traditional Cameroonian architectural pattern with intricate wooden carvings visible through a dark, cinematic overlay. Golden light subtlely highlights the textures of the Foumban Palace inspired artwork. The overall mood is prestigious, cultural, and mysterious, utilizing a primary palette of deep charcoal and rich gold accents.">
+<!-- Top Wordmark -->
+<header class="w-full text-center pt-12 animate-fade-in">
+<h1 class="text-gold-serif text-3xl sm:text-4xl lg:text-5xl tracking-[0.2em] text-primary uppercase leading-tight drop-shadow-2xl">
+                HERITAGE OF <br/> <span class="text-primary-fixed">CAMEROON</span>
+</h1>
+<div class="mt-4 w-16 h-0.5 bg-primary/40 mx-auto rounded-full"></div>
+</header>
+<!-- Central Form Cluster -->
+<div class="w-full max-w-md space-y-8 backdrop-blur-md bg-surface-container-lowest/30 p-8 rounded-xl border border-outline-variant/20 shadow-2xl">
+<div class="space-y-6">
+<!-- Username Field -->
+<div class="relative group">
+<label class="block text-xs font-label uppercase tracking-widest text-outline mb-2 ml-1">Email or Username</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-outline group-focus-within:text-primary transition-colors">person</span>
+<input class="w-full bg-surface-container/40 border border-outline-variant/30 rounded-lg py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body text-sm" placeholder="Enter your lineage identity" type="text"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="relative group">
+<label class="block text-xs font-label uppercase tracking-widest text-outline mb-2 ml-1">Password</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-outline group-focus-within:text-primary transition-colors">key</span>
+<input class="w-full bg-surface-container/40 border border-outline-variant/30 rounded-lg py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body text-sm" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Login Button -->
+<div class="pt-4">
+<button class="w-full bg-primary hover:bg-primary-fixed text-on-primary py-5 rounded-full font-headline font-bold text-lg tracking-wide shadow-xl shadow-primary/10 active:scale-95 transition-transform duration-150">
+                    Enter the Horizon
+                </button>
+</div>
+<div class="flex items-center justify-between px-2">
+<label class="flex items-center space-x-2 cursor-pointer">
+<input class="rounded border-outline-variant bg-surface-container-high text-primary focus:ring-primary/50 w-4 h-4" type="checkbox"/>
+<span class="text-xs font-label text-on-surface-variant">Remember my path</span>
+</label>
+<a class="text-xs font-label text-primary/80 hover:text-primary transition-colors" href="#">Lost your key?</a>
+</div>
+</div>
+<!-- Bottom Link Cluster -->
+<footer class="pb-12 text-center w-full">
+<p class="text-on-surface-variant font-label text-sm tracking-wide">
+                New to the Heritage? 
+                <a class="text-primary font-bold ml-1 hover:underline underline-offset-4 decoration-primary/50 transition-all" href="#">Join the Story</a>
+</p>
+<div class="mt-8 flex justify-center space-x-6 opacity-60">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center border border-outline-variant/40 cursor-pointer hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm">language</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center border border-outline-variant/40 cursor-pointer hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm">public</span>
+</div>
+</div>
+</footer>
+<!-- Decorative Asymmetric Elements -->
+<div class="absolute -top-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute -bottom-20 -right-20 w-80 h-80 bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+</main>
+</body></html>

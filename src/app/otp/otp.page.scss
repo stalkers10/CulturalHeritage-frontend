@@ -1,0 +1,110 @@
+.login-overlay {
+    background: linear-gradient(135deg, #1a1a1a 0%, #3d2b1f 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.text-gold-serif {
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.accent-line {
+    width: 60px;
+    height: 3px;
+    background: #d4af37;
+    margin: 0 auto 30px;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.otp-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.email-display {
+    color: #d4af37;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.timer-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    color: #ff4d4d;
+}
+
+.timer-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.font-label {
+    font-size: 0.75rem;
+    color: #a0a0a0;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.custom-input {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    --padding-start: 15px;
+    color: white;
+}
+
+.custom-input .material-symbols-outlined {
+    color: #d4af37;
+    font-size: 20px;
+}
+
+.enter-button {
+    --background: #d4af37;
+    --color: #000;
+    --border-radius: 12px;
+    height: 50px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-footer a {
+    color: #d4af37;
+    text-decoration: none;
+    cursor: pointer;
+}
+ion-input{
+    color: #ffffff;
+    background-color: transparent
+}

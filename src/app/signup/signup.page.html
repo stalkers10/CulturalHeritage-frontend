@@ -1,0 +1,116 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="signup-toolbar">
+    <ion-buttons slot="start">
+      <span class="material-symbols-outlined header-icon">auto_awesome</span>
+    </ion-buttons>
+    <ion-title class="uppercase tracking-tighter font-headline">L'HÉRITAGE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="signup-content">
+    
+    <section class="hero-section">
+      <div class="pattern-overlay"></div>
+      <div class="hero-text">
+        <h1 class="serif-title">Become a Digital Griot</h1>
+        <p class="font-label tracking-widest uppercase">Preserve the Soul of Cameroon</p>
+      </div>
+    </section>
+
+    <section class="form-container">
+      <div class="glass-card signup-card">
+        <form (ngSubmit)="onSignup()" #signupForm="ngForm">
+          
+          <div class="input-group">
+            <label class="font-label uppercase tracking-widest">Full Name</label>
+            <ion-item lines="none" class="custom-input">
+              <span class="material-symbols-outlined" slot="start">person</span>
+              <ion-input 
+                placeholder="Enter your full name" 
+                [(ngModel)]="signupData.fullName" 
+                name="fullName" 
+                required>
+              </ion-input>
+            </ion-item>
+          </div>
+
+          <div class="input-group">
+            <label class="font-label uppercase tracking-widest">Email Address</label>
+            <ion-item lines="none" class="custom-input">
+              <span class="material-symbols-outlined" slot="start">alternate_email</span>
+              <ion-input 
+                type="email" 
+                placeholder="email@heritage.cm" 
+                [(ngModel)]="signupData.email" 
+                name="email" 
+                required>
+              </ion-input>
+            </ion-item>
+          </div>
+
+          <div class="input-group">
+            <label class="font-label uppercase tracking-widest">Create Password</label>
+            <ion-item lines="none" class="custom-input">
+              <span class="material-symbols-outlined" slot="start">lock_open</span>
+              <ion-input class="input"
+                [type]="showPassword ? 'text' : 'password'" 
+                placeholder="••••••••" 
+                [(ngModel)]="signupData.password" 
+                name="password" 
+                required>
+              </ion-input>
+              <ion-button fill="clear" slot="end" class="view-password" (click)="togglePasswordVisibility()">
+                <span class="material-symbols-outlined">{{ showPassword ? 'visibility_off' : 'visibility' }}</span>
+              </ion-button>
+            </ion-item>
+          </div>
+
+          <div class="terms-group">
+            <ion-item lines="none" class="terms-item">
+              <ion-checkbox slot="start" [(ngModel)]="signupData.agreeTerms" name="agreeTerms" required></ion-checkbox>
+              <ion-label class="font-label">
+                I agree to preserve and respect our heritage and abide by the community guidelines.
+              </ion-label>
+            </ion-item>
+          </div>
+
+          <ion-button expand="block" type="submit" class="journey-button" [disabled]="!signupForm.valid || !signupData.agreeTerms">
+            <span class="font-label uppercase tracking-widest">Start Your Journey</span>
+            <span class="material-symbols-outlined" slot="end">arrow_forward</span>
+          </ion-button>
+        </form>
+
+        <div class="footer-links">
+          <p class="font-label">
+            Already a member? 
+            <a routerLink="/login" class="signin-link">Sign in</a>
+          </p>
+          
+          <div class="social-auth">
+            <ion-button fill="outline" class="social-btn" (click)="onSocialSignup('google')">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnaXGLorqzAdCIalkDNyxaIN-FCNg9Ohl4BUxoudLhj4HYALdO7ljO5UIEF-QtsFiZdUvHodHOv6Mtq_JEXFM_-Na9-YMmOt2-_1rHhM0xh8R5jiRLK_iAQ0qKP0J6Ch2jLVT9zKFGruIvw3eRtbScTyKc8qF3MA7V0o-4F2-0LwHTCFWiRd-Wt1xM3XsROIZk0x1ahtH3Jg_J6Ziq_Rx7iFpAGXFTf0YIacq8VNeeQBDyiBshzqIgPeZiAmbrGH9YVwltL2YZJzHi" alt="Google">
+              <span class="font-label">Google</span>
+            </ion-button>
+            <ion-button fill="outline" class="social-btn" (click)="onSocialSignup('biometric')">
+              <span class="material-symbols-outlined">fingerprint</span>
+              <span class="font-label">Biometric</span>
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <footer class="app-footer">
+      <p class="uppercase tracking-widest">L'Héritage du Cameroun</p>
+      <div class="footer-icons">
+        <span class="material-symbols-outlined">public</span>
+        <span class="material-symbols-outlined">share</span>
+        <span class="material-symbols-outlined">mail</span>
+      </div>
+      <p class="copyright">© 2024 Ministry of Arts and Culture. All Rights Reserved.</p>
+    </footer>
+
+  </div>
+</ion-content>

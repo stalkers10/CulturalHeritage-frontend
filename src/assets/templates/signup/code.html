@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Signup - Heritage of Cameroon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700;800&amp;family=Manrope:wght@300;400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#1a1c16",
+                        "on-secondary-fixed-variant": "#920703",
+                        "tertiary": "#b0d9b0",
+                        "secondary-fixed": "#ffdad4",
+                        "primary-container": "#d4af37",
+                        "background": "#12140e",
+                        "outline-variant": "#4d4635",
+                        "outline": "#99907c",
+                        "inverse-primary": "#735c00",
+                        "on-background": "#e3e3d9",
+                        "on-secondary-fixed": "#410000",
+                        "on-primary": "#3c2f00",
+                        "on-error": "#690005",
+                        "surface-bright": "#383a33",
+                        "surface": "#12140e",
+                        "on-tertiary": "#13371b",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-tint": "#e9c349",
+                        "inverse-on-surface": "#2f312a",
+                        "secondary": "#ffb4a8",
+                        "on-tertiary-fixed-variant": "#2b4e30",
+                        "tertiary-fixed": "#c3edc3",
+                        "tertiary-container": "#95bd96",
+                        "surface-variant": "#34362e",
+                        "tertiary-fixed-dim": "#a8d1a9",
+                        "on-secondary-container": "#ff9a8a",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#690000",
+                        "surface-container-lowest": "#0d0f09",
+                        "secondary-fixed-dim": "#ffb4a8",
+                        "inverse-surface": "#e3e3d9",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-tertiary-fixed": "#002109",
+                        "surface-dim": "#12140e",
+                        "on-surface": "#e3e3d9",
+                        "surface-container-high": "#292b24",
+                        "secondary-container": "#920703",
+                        "primary-fixed": "#ffe088",
+                        "surface-container": "#1e201a",
+                        "primary": "#f2ca50",
+                        "on-primary-container": "#554300",
+                        "surface-container-highest": "#34362e",
+                        "on-tertiary-container": "#294d2e",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#241a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Public Sans"],
+                        "display": ["Public Sans"],
+                        "body": ["Manrope"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.serif-title {
+    font-family: "Public Sans", serif;
+    font-weight: 800
+    }
+.pattern-overlay {
+    background-image: linear-gradient(to bottom, rgba(18, 20, 14, 0.4), rgba(18, 20, 14, 1)), url(https://lh3.googleusercontent.com/aida/ADBb0uhBooH2ZrEUDyYYIuCW8_T2Ucn4SsamC0SK4Z0XUJZ_8atCS7EjvqoTf2McN0UB583MYGRrF_KVZSn_p23akvMAZjnOk715mP40ZetNqVrPt691XiL0UgNjQ98vP7ZqIorL9WJA6JuT0PaKhHxY0arcO_ZkBgj2tW_vm7XrC5UaYgcVbVfVD2DlldI2CX5sfVxEV3qmG3TvG6KfEiUoLZkmzH0gRKosIE9hFj4YdYatNGcc-6ve2vy4zWIj);
+    background-size: cover;
+    background-position: center
+    }</style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen">
+<!-- Top App Bar (Restricted Version for Focused Flow) -->
+<header class="flex justify-between items-center px-6 h-16 w-full fixed top-0 z-50 bg-[#12140E] dark:bg-neutral-950 border-b border-amber-900/30 shadow-lg shadow-black/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-500" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-xl font-bold text-amber-500 uppercase tracking-tighter font-headline">L'HÉRITAGE</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-neutral-400 hover:text-amber-400 transition-colors font-label text-sm">Help</button>
+</div>
+</header>
+<main class="pt-16 pb-12 flex flex-col items-center">
+<!-- Hero Section -->
+<section class="relative w-full h-[35vh] md:h-[45vh] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 pattern-overlay" data-alt="A luxurious background featuring traditional Cameroonian textile patterns with intricate geometric motifs in deep earth tones. The lighting is low and atmospheric, emphasizing the rich textures and golden-amber highlights. A subtle mist adds depth to the cultural landscape, creating a sense of timeless elegance and digital heritage preservation."></div>
+<div class="relative z-10 text-center px-6">
+<h1 class="serif-title text-4xl md:text-6xl text-primary tracking-tight mb-2">Become a Digital Griot</h1>
+<p class="text-on-surface-variant font-label tracking-widest text-xs md:text-sm uppercase">Preserve the Soul of Cameroon</p>
+</div>
+</section>
+<!-- Signup Form Container -->
+<section class="w-full max-w-md px-6 -mt-12 relative z-20">
+<div class="bg-surface-container border border-outline-variant/30 rounded-xl p-8 shadow-2xl backdrop-blur-md">
+<form class="space-y-6">
+<!-- Full Name Field -->
+<div class="space-y-2">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant" for="full-name">Full Name</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors" data-icon="person">person</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg py-3 pl-10 pr-4 text-on-surface placeholder:text-outline/50 transition-all outline-none" id="full-name" placeholder="Enter your full name" type="text"/>
+</div>
+</div>
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant" for="email">Email Address</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors" data-icon="alternate_email">alternate_email</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg py-3 pl-10 pr-4 text-on-surface placeholder:text-outline/50 transition-all outline-none" id="email" placeholder="email@heritage.cm" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant" for="password">Create Password</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors" data-icon="lock_open">lock_open</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg py-3 pl-10 pr-12 text-on-surface placeholder:text-outline/50 transition-all outline-none" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary" type="button">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Terms Checkbox -->
+<div class="flex items-start gap-3 py-2">
+<div class="flex items-center h-5">
+<input class="w-5 h-5 rounded border-outline-variant bg-surface-container-low text-primary focus:ring-primary transition-all" id="preserve-check" type="checkbox"/>
+</div>
+<label class="text-sm text-on-surface-variant font-label leading-tight" for="preserve-check">
+                            I agree to preserve and respect our heritage and abide by the community guidelines.
+                        </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary-container hover:bg-primary text-on-primary-container font-bold py-4 rounded-xl shadow-lg shadow-primary-container/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2 group" type="submit">
+<span class="font-label uppercase tracking-widest">Start Your Journey</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Footer Links -->
+<div class="mt-10 pt-6 border-t border-outline-variant/30 text-center">
+<p class="text-on-surface-variant text-sm mb-6">
+                        Already a member? 
+                        <a class="text-primary font-bold hover:underline ml-1" href="#">Sign in</a>
+</p>
+<!-- Secondary Auth Options -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 bg-surface-container-low border border-outline-variant/30 hover:bg-surface-container-highest rounded-lg py-2 transition-colors">
+<img alt="Google" class="w-4 h-4 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnaXGLorqzAdCIalkDNyxaIN-FCNg9Ohl4BUxoudLhj4HYALdO7ljO5UIEF-QtsFiZdUvHodHOv6Mtq_JEXFM_-Na9-YMmOt2-_1rHhM0xh8R5jiRLK_iAQ0qKP0J6Ch2jLVT9zKFGruIvw3eRtbScTyKc8qF3MA7V0o-4F2-0LwHTCFWiRd-Wt1xM3XsROIZk0x1ahtH3Jg_J6Ziq_Rx7iFpAGXFTf0YIacq8VNeeQBDyiBshzqIgPeZiAmbrGH9YVwltL2YZJzHi"/>
+<span class="text-xs font-label">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 bg-surface-container-low border border-outline-variant/30 hover:bg-surface-container-highest rounded-lg py-2 transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="fingerprint">fingerprint</span>
+<span class="text-xs font-label">Biometric</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Aesthetic Cards / Bento Grid Preview (Visual Flourish) -->
+<section class="w-full max-w-4xl px-6 mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="col-span-1 md:col-span-2 relative h-48 rounded-2xl overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A cinematic panoramic view of Mount Cameroon at sunset, with golden light reflecting off the basalt rocks and lush greenery. The atmosphere is majestic and serene, captured with a professional wide-angle lens. The scene is tinted with warm ambers and deep earthy greens to match the heritage brand colors." src="https://lh3.googleusercontent.com/aida/ADBb0ugmeRDz4DR7Oxci505a7nW99WJLdVTCozF5qAM26srg9dIPuKQLC4ZqI9Weh8ZLdJsV-36BZtRO-C5kNSpdAcknI_7mTM3kIlxXnCf7yc3fvjsld58uvIA35rpIs8rbhGfMJ_9HV6Wgj8rY58k3mxbIw6dZkxOaQ6ftPf7qxTGpJZ0KD55MbjbY5tVFkzxjydvdCPPgpurROyPVWNmW9o3SfWwfoOnoh3-svTyosOzcUWLx3PwQLm8ZYZ-_sQ9sCalUr_WgQYq_qmY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex items-end p-6">
+<div>
+<h3 class="text-primary font-bold text-lg">Digital Archives</h3>
+<p class="text-on-surface-variant text-xs">Explore thousands of cataloged historical artifacts.</p>
+</div>
+</div>
+</div>
+<div class="relative h-48 rounded-2xl overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A close-up high-resolution photograph of a traditional Bamileke mask, highlighting the intricate beadwork and wood carvings. The lighting is dramatic and focused, casting soft shadows that emphasize the mask's expressive features. The color palette is dominated by royal reds and rich golds against a pitch-black museum background." src="https://lh3.googleusercontent.com/aida/ADBb0ugctu2zZl-GLcxl1wZnUYuBwXuY6AlTawXXtb2s64jjCqKR-xofaETTtEdOdX-plObrXnB-Ax_WeI55jraVFYymCpo9549YyTolEZqszANwLlaFZJbhZjrGe4JYwVZV24_Jl4Cip46-6elmwUUxboM-LGub1pn7mbFFAjaVzq7JVrCTPCgOm56IWDI4LAjEv4SvjGwADvrPR2Ms7GfSfrLJ8o_lD_qLoz1-trz3A4GID5PntN_aTumQe4NC"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex items-end p-6">
+<div>
+<h3 class="text-primary font-bold text-lg">Oral Stories</h3>
+<p class="text-on-surface-variant text-xs">Listen to the elders speak.</p>
+</div>
+</div>
+</div>
+</section>
+<footer class="mt-20 w-full px-6 py-12 bg-surface-container-lowest border-t border-outline-variant/10 text-center">
+<div class="max-w-screen-xl mx-auto">
+<p class="text-outline text-xs font-label tracking-widest uppercase mb-4">L'Héritage du Cameroun</p>
+<div class="flex justify-center gap-8 mb-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="public">public</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="share">share</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="mail">mail</span></a>
+</div>
+<p class="text-outline/50 text-[10px]">© 2024 Ministry of Arts and Culture. All Rights Reserved.</p>
+</div>
+</footer>
+</main>
+</body></html>

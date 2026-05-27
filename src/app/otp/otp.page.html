@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true">
+  <div class="login-overlay">
+    <div class="login-container">
+      
+      <header class="header-section">
+        <h1 class="text-gold-serif">
+          VERIFY YOUR <br/> <span>IDENTITY</span>
+        </h1>
+        <div class="accent-line"></div>
+      </header>
+
+      <div class="form-cluster glass-card">
+        <div class="otp-info">
+          <p class="font-label uppercase tracking-widest">A 6-digit code was sent to:</p>
+          <p class="email-display">{{ email }}</p>
+        </div>
+
+        <div class="timer-section">
+          <span class="material-symbols-outlined">timer</span>
+          <span class="timer-text">{{ displayTime }}</span>
+        </div>
+
+        <form (ngSubmit)="onVerify()">
+          <div class="input-group">
+            <label class="font-label uppercase tracking-widest">Verification Code</label>
+            <ion-item lines="none" class="custom-input">
+              <span class="material-symbols-outlined" slot="start">verified_user</span>
+              <ion-input 
+                type="tel"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                placeholder="000000" 
+                [(ngModel)]="otpCode" 
+                (ionInput)="onOtpInput($event)"
+                name="otpCode" 
+                maxlength="6"
+                required>
+              </ion-input>
+            </ion-item>
+          </div>
+
+          <div class="login-action">
+            <ion-button expand="block" type="submit" class="enter-button" [disabled]="isVerifying">
+              {{ isVerifying ? 'Verifying...' : 'Verify Code' }}
+            </ion-button>
+          </div>
+        </form>
+
+        <div class="form-footer">
+          <p class="font-label">Didn't get the code? <a (click)="goBackToLogin()">Go back to login</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

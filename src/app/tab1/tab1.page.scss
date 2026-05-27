@@ -1,0 +1,26 @@
+ion-content {
+ion-header{
+    
+  ion-toolbar {
+    ion-item-divider {
+      --background: none;
+      display: flex;
+      justify-content: space-around;
+      ion-label {
+        font-size: 1rem;
+      }
+      ion-avatar {
+        width: 30px;
+        height: 30px;
+      }
+      ion-menu-button {
+        --background: red;
+        font-size: larger;
+      }
+    }
+    ion-searchbar{
+        margin-top: 10px;
+    }
+  }
+}
+}

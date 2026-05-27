@@ -1,0 +1,309 @@
+.signup-toolbar {
+  --background: #12140E;
+  --color: var(--ion-color-primary);
+  border-bottom: 1px solid rgba(139, 0, 0, 0.3);
+  
+  .header-icon {
+    font-size: 1.2rem;
+    margin-left: 12px;
+  }
+
+  ion-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+}
+
+.signup-content {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ion-background-color);
+}
+
+.hero-section {
+  position: relative;
+  height: 35vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  .pattern-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to bottom, rgba(18, 20, 14, 0.4), rgba(18, 20, 14, 1)), url('https://lh3.googleusercontent.com/aida/ADBb0uhBooH2ZrEUDyYYIuCW8_T2Ucn4SsamC0SK4Z0XUJZ_8atCS7EjvqoTf2McN0UB583MYGRrF_KVZSn_p23akvMAZjnOk715mP40ZetNqVrPt691XiL0UgNjQ98vP7ZqIorL9WJA6JuT0PaKhHxY0arcO_ZkBgj2tW_vm7XrC5UaYgcVbVfVD2DlldI2CX5sfVxEV3qmG3TvG6KfEiUoLZkmzH0gRKosIE9hFj4YdYatNGcc-6ve2vy4zWIj');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 24px;
+
+    h1 {
+      font-family: 'Public Sans', serif;
+      font-weight: 800;
+      font-size: 2.5rem;
+      color: var(--ion-color-primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      color: var(--ion-color-medium);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+    }
+  }
+}
+
+.form-container {
+  padding: 0 24px;
+  margin-top: -48px;
+  position: relative;
+  z-index: 20;
+  max-width: 450px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.signup-card {
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
+  .input-group {
+    margin-bottom: 24px;
+
+    label {
+      display: block;
+      font-size: 0.65rem;
+      color: var(--ion-color-medium);
+      margin-bottom: 8px;
+      margin-left: 4px;
+    }
+  }
+}
+
+.custom-input {
+  --background: #1a1c16;
+  --border-radius: 8px;
+  --padding-start: 12px;
+  --inner-padding-end: 12px;
+  border: 1px solid rgba(77, 70, 53, 0.5);
+  
+  &.item-has-focus {
+    border-color: var(--ion-color-primary);
+  }
+
+  span[slot="start"] {
+    color: var(--ion-color-medium);
+    margin-right: 12px;
+    font-size: 1.2rem;
+  }
+
+  ion-input {
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.9rem;
+    --border-radius:10px ;
+  }
+}
+
+.view-password {
+  --color: var(--ion-color-medium);
+  margin: 0;
+  span { font-size: 1rem; }
+}
+
+.terms-group {
+  margin-top: 12px;
+  margin-bottom: 24px;
+
+  .terms-item {
+    --background: transparent;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    
+    ion-checkbox {
+      --size: 20px;
+      --border-radius: 4px;
+      margin-right: 12px;
+    }
+
+    ion-label {
+      font-size: 0.8rem;
+      color: var(--ion-color-medium);
+      white-space: normal;
+      line-height: 1.4;
+    }
+  }
+}
+
+.journey-button {
+  --background: var(--ion-color-primary-container);
+  --color: var(--ion-color-primary-contrast);
+  --border-radius: 12px;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 10px 15px -3px rgba(212, 175, 55, 0.2);
+
+  &:hover {
+    --background: var(--ion-color-primary);
+  }
+
+  span[slot="end"] {
+    margin-left: 8px;
+    font-size: 1.2rem;
+  }
+}
+
+.footer-links {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(77, 70, 53, 0.3);
+  text-align: center;
+
+  p {
+    font-size: 0.9rem;
+    color: var(--ion-color-medium);
+    margin-bottom: 24px;
+  }
+
+  .signin-link {
+    color: var(--ion-color-primary);
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 4px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.social-auth {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  .social-btn {
+    --border-color: rgba(77, 70, 53, 0.3);
+    --background: #1a1c16;
+    --color: var(--ion-text-color);
+    --border-radius: 8px;
+    height: 40px;
+    font-size: 0.75rem;
+
+    img {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      filter: grayscale(1);
+    }
+
+    span.material-symbols-outlined {
+      font-size: 1.1rem;
+      margin-right: 8px;
+    }
+  }
+}
+
+.visual-flourish {
+  padding: 64px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .bento-item {
+    position: relative;
+    height: 192px;
+    border-radius: 16px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-cover: cover;
+      transition: transform 0.7s;
+    }
+
+    &:hover img {
+      transform: scale(1.1);
+    }
+
+    .item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(18, 20, 14, 0.9), transparent);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+
+      h3 {
+        color: var(--ion-color-primary);
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+
+      p {
+        color: var(--ion-color-medium);
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
+.app-footer {
+  background-color: #0d0f09;
+  padding: 48px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(77, 70, 53, 0.1);
+
+  p {
+    font-size: 0.75rem;
+    color: var(--ion-color-medium);
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+  }
+
+  .footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 32px;
+    color: var(--ion-color-medium);
+
+    span {
+      font-size: 1.2rem;
+      cursor: pointer;
+      
+      &:hover {
+        color: var(--ion-color-primary);
+      }
+    }
+  }
+
+  .copyright {
+    font-size: 0.6rem;
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,81 @@
+<ion-content [fullscreen]="true">
+  <div class="login-overlay">
+    <div class="login-container">
+      
+      <header class="header-section">
+        <h1 class="text-gold-serif">
+          HERITAGE OF <br/> <span>CAMEROON</span>
+        </h1>
+        <div class="accent-line"></div>
+      </header>
+
+      <div class="form-cluster glass-card">
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+          
+          <div class="input-group">
+            <label class="font-label uppercase tracking-widest">Email or Username</label>
+            <ion-item lines="none" class="custom-input">
+              <span class="material-symbols-outlined" slot="start">person</span>
+              <ion-input 
+                placeholder="Enter your lineage identity" 
+                [(ngModel)]="loginData.email" 
+                name="email" 
+                required>
+              </ion-input>
+            </ion-item>
+          </div>
+
+          <div class="input-group">
+            <label class="font-label uppercase tracking-widest">Password</label>
+            <ion-item lines="none" class="custom-input">
+              <span class="material-symbols-outlined" slot="start">key</span>
+              <ion-input 
+                [type]="showPassword ? 'text' : 'password'" 
+                placeholder="••••••••" 
+                [(ngModel)]="loginData.password" 
+                name="password" 
+                required>
+              </ion-input>
+              <ion-button type="button" fill="clear" slot="end" class="view-password" (click)="togglePasswordVisibility()">
+                <span class="material-symbols-outlined">{{ showPassword ? 'visibility_off' : 'visibility' }}</span>
+              </ion-button>
+            </ion-item>
+          </div>
+
+
+          <div class="login-action">
+            <ion-button expand="block" type="submit" class="enter-button" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'Sending code...' : 'Enter the Horizon' }}
+            </ion-button>
+          </div>
+
+          <div class="form-footer">
+            <ion-item lines="none" class="remember-me">
+              <ion-checkbox slot="start"></ion-checkbox>
+              <ion-label class="font-label">Remember my path</ion-label>
+            </ion-item>
+            <a (click)="onForgotPassword()" class="font-label">Lost your pass?</a>
+          </div>
+
+        </form>
+      </div>
+
+      <footer class="footer-section">
+        <p class="font-label">
+          New to the Heritage? 
+          <a routerLink="/signup" class="join-link">Join the Story</a>
+        </p>
+        
+        <div class="social-links">
+          <div class="social-icon">
+            <span class="material-symbols-outlined">language</span>
+          </div>
+          <div class="social-icon">
+            <span class="material-symbols-outlined">public</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+</ion-content>

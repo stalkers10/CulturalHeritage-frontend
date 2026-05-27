@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#574500",
+                    "surface": "#12140e",
+                    "surface-container": "#1e201a",
+                    "on-secondary": "#690000",
+                    "on-tertiary-fixed-variant": "#2b4e30",
+                    "surface-bright": "#383a33",
+                    "outline": "#99907c",
+                    "on-secondary-container": "#ff9a8a",
+                    "on-error": "#690005",
+                    "tertiary": "#b0d9b0",
+                    "on-primary-fixed": "#241a00",
+                    "primary": "#f2ca50",
+                    "surface-container-high": "#292b24",
+                    "surface-container-low": "#1a1c16",
+                    "primary-container": "#d4af37",
+                    "background": "#12140e",
+                    "error-container": "#93000a",
+                    "primary-fixed": "#ffe088",
+                    "on-secondary-fixed-variant": "#920703",
+                    "inverse-primary": "#735c00",
+                    "inverse-on-surface": "#2f312a",
+                    "on-tertiary-fixed": "#002109",
+                    "on-surface-variant": "#d0c5af",
+                    "on-secondary-fixed": "#410000",
+                    "outline-variant": "#4d4635",
+                    "surface-variant": "#34362e",
+                    "on-tertiary": "#13371b",
+                    "tertiary-fixed-dim": "#a8d1a9",
+                    "on-error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#ffb4a8",
+                    "primary-fixed-dim": "#e9c349",
+                    "surface-container-lowest": "#0d0f09",
+                    "secondary": "#ffb4a8",
+                    "on-tertiary-container": "#294d2e",
+                    "on-primary": "#3c2f00",
+                    "surface-tint": "#e9c349",
+                    "on-primary-container": "#554300",
+                    "tertiary-container": "#95bd96",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed": "#c3edc3",
+                    "surface-dim": "#12140e",
+                    "secondary-fixed": "#ffdad4",
+                    "on-background": "#e3e3d9",
+                    "surface-container-highest": "#34362e",
+                    "secondary-container": "#920703",
+                    "on-surface": "#e3e3d9",
+                    "inverse-surface": "#e3e3d9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Public Sans"],
+                    "body": ["Manrope"],
+                    "label": ["Plus Jakarta Sans"],
+                    "serif": ["Newsreader", "serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #12140e;
+            color: #e3e3d9;
+            font-family: 'Manrope', sans-serif;
+        }
+        .serif-display {
+            font-family: 'Newsreader', serif;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- Top AppBar -->
+<header class="bg-[#12140e] dark:bg-[#12140e] flex justify-between items-center px-6 py-4 w-full z-50 sticky top-0 backdrop-blur-md bg-opacity-80">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#e9c349]" data-icon="menu">menu</span>
+<h1 class="text-2xl font-serif text-[#e9c349] tracking-tight">Heritage Events</h1>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="portrait of a young african woman with braided hair smiling softly in warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3And0Steep-TVDbYjRZqbKl28-MM37nWnyf4sl9zNxFxJYnMAbzHziern-EOla3u5QAAAls35Vo7fyqthX0a5itsXQFI7T5C0TQKX_oL6CcMOXetAKSDCijJFIRQKW_qVzppI7mO25XIsq95OFmmf-P7Xvbma5wcd43uEpc-mf6xaKfpaIz9IdQ1zvPlZxEyMsWLIFES7noDLZXHxoylpK_2-xvRsi-0d8QVrQ5UAxdrvdMJ9wOTD-pIXf3qkUbe43xdRcGKSfhiA"/>
+</div>
+</header>
+<main class="px-5 pt-4 space-y-8">
+<!-- Search & Filter Bar -->
+<section class="relative group">
+<div class="flex items-center gap-3 bg-surface-container rounded-xl p-3 px-4 border border-outline-variant/30 focus-within:border-primary-container transition-all">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-label w-full placeholder-outline" placeholder="Search by region or festival type..." type="text"/>
+<span class="material-symbols-outlined text-[#e9c349]" data-icon="tune">tune</span>
+</div>
+<!-- Quick Chips -->
+<div class="flex gap-2 mt-4 overflow-x-auto pb-1 no-scrollbar">
+<span class="px-4 py-1.5 rounded-full bg-primary-container text-on-primary-container text-xs font-bold font-label whitespace-nowrap">All Regions</span>
+<span class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold font-label whitespace-nowrap">Littoral</span>
+<span class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold font-label whitespace-nowrap">West</span>
+<span class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold font-label whitespace-nowrap">North</span>
+<span class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold font-label whitespace-nowrap">South</span>
+</div>
+</section>
+<!-- Featured Event Hero Card -->
+<section>
+<div class="flex justify-between items-end mb-4">
+<h2 class="font-headline text-xl font-bold tracking-tight">Featured Festival</h2>
+<span class="text-primary text-xs font-bold uppercase tracking-widest font-label">View Live</span>
+</div>
+<div class="relative h-[420px] rounded-2xl overflow-hidden shadow-2xl group">
+<img alt="Nguon Festival" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="large crowd at the Nguon festival in Foumban Cameroon with traditional bamoun dancers in vibrant attire and masks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVoB3dyJsouCZ48rpe7NT2gy_bAyLnYdtC3pGk6D_BXAzwFHd8_7LCYYZ7WsC5qErMHxTkTrYhs70HbUdeN5ZekUTJfa0V2DqLuNcmIaUWpic2wTbe8KqvbYG2fpMZ3qApAOS2lRBqXG25CbNyyJOiKA-V2IBvOfGDavim-P8hld_oSnXLfh-wF7uefSJA-DRqrZuFM5FsQzmcEqC4m_EE03rO3VE4rixysfhtc9bOfct7aEPoZweRp7xjL6HcdPVgaGtpI4gwzl8g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+<!-- Overlays -->
+<div class="absolute top-4 left-4 flex gap-2">
+<div class="bg-secondary-container text-white px-3 py-1 rounded-lg flex items-center gap-1.5 backdrop-blur-md">
+<span class="material-symbols-outlined text-xs" data-icon="local_fire_department" data-weight="fill" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Biannual Major Event</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<div class="flex items-center gap-2 text-primary-fixed-dim mb-2">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_month">calendar_month</span>
+<p class="text-xs font-bold font-label uppercase tracking-widest">December 07 - 14, 2024</p>
+</div>
+<h3 class="serif-display text-4xl text-white mb-2 leading-tight">The Nguon Festival</h3>
+<div class="flex items-center gap-2 text-stone-300">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+<p class="text-sm font-body">Foumban, West Region</p>
+</div>
+<button class="mt-6 w-full bg-[#d4af37] text-on-primary-container font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-primary transition-colors">
+                        Discover Heritage
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Coming Up Grid -->
+<section>
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline text-xl font-bold tracking-tight">Coming Up</h2>
+<button class="text-primary-fixed-dim text-xs font-bold font-label flex items-center gap-1">
+                    See All <span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="flex gap-4 bg-surface-container-low p-3 rounded-2xl border border-white/5 items-center">
+<div class="w-24 h-24 rounded-xl overflow-hidden shrink-0">
+<img alt="Ngondo Festival" class="w-full h-full object-cover" data-alt="traditional sawa people gathering at the banks of the wouri river for the ngondo festival in douala cameroon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUigw_95-zupuTx_IF-B_YhcSgu_4Z0LOkyRr7MMzW9YPoswcUmxAx5RTEnpfrEzJb1rFHNEIMPd9qFC9TA1Vf-orFcJ2MTEjhvo8SAyWRcKfdFcWUTrns_RJioEbXjjpvl31ZpnyK68oteM1sXU0f_tAtVIqyR5ufC1INVtQ7Jpz9jZxm9px_O3MUI_Mkkg34Ja6i6WB-EbohXkp4n9O7mxIaHJozVezzo0rOL0kH-G3XfvWm4UTIn9MaMxCHb6O41QtorUsacl_K"/>
+</div>
+<div class="flex flex-col justify-center">
+<span class="text-[10px] font-bold font-label text-primary uppercase tracking-widest mb-1">Nov 30, 2024</span>
+<h4 class="font-bold text-base text-on-surface leading-tight mb-1">Ngondo Assembly</h4>
+<p class="text-xs text-on-surface-variant line-clamp-2 font-body leading-relaxed">The grand water festival of the Sawa people along the Wouri banks.</p>
+<div class="mt-2 flex items-center gap-1 text-stone-500">
+<span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span>
+<span class="text-[10px]">Douala, Littoral</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex gap-4 bg-surface-container-low p-3 rounded-2xl border border-white/5 items-center">
+<div class="w-24 h-24 rounded-xl overflow-hidden shrink-0">
+<img alt="Mendzang Music" class="w-full h-full object-cover" data-alt="musicians playing traditional xylophones and drums at a village cultural day in central cameroon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw-3uSDO7PUBYGAuffz2TBPTUbTo5sOTYzA5alCXZIpMmwQ_51w6XR1UWm5ufCwlznCV62pkbyIAtZgFTSk_8XKAUqvDt96Hw65uYmw3IROhrlIKNEUZfC0xBOlc4BRjqvSAc7CJlxnTtjVaob_q1WKu-OTD3FgNzL5xgSbv18nBhWISD-PDrcyZjTmds3ZKQ6Gbe2QmYHxEb_o2_2J-hHYEpRodDxkc7xPkzKrDN-ySUk9GZWOAjiARpLDP1HVPb44HiA8LOG_nvg"/>
+</div>
+<div class="flex flex-col justify-center">
+<span class="text-[10px] font-bold font-label text-primary uppercase tracking-widest mb-1">Dec 02, 2024</span>
+<h4 class="font-bold text-base text-on-surface leading-tight mb-1">Ekan Heritage Night</h4>
+<p class="text-xs text-on-surface-variant line-clamp-2 font-body leading-relaxed">A celebration of Beti-Fang oral traditions, music and dance.</p>
+<div class="mt-2 flex items-center gap-1 text-stone-500">
+<span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span>
+<span class="text-[10px]">Yaoundé, Centre</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex gap-4 bg-surface-container-low p-3 rounded-2xl border border-white/5 items-center">
+<div class="w-24 h-24 rounded-xl overflow-hidden shrink-0">
+<img alt="Nyem-Nyem Festival" class="w-full h-full object-cover" data-alt="warriors on horseback in traditional costumes during the nyem nyem festival in galim cameroon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_hG-l0ki1fogG9gBGkN4pfW-UVh-ulJs2P76Xjy_UdspLMLBs0xmprRV_VmPS12ple8I3WfG22l0lQjxMKb37XHhuvV0A4yMXUCcGxoCdztilBvgSb17fcyRUCmraBPE8LlMVPqWCLzew9pbuhg_mUp_umj1N5FpxbK74ZRcaN1eYIYAFrJm0QL_NNC5o5SCDKAOzx9hJ61wr2ldSjeLjjo8yZ3UWRZvxsxCglby2yH6wkgYYQO5-0jMn5EB-pKCMOO7-LB9Pm8_r"/>
+</div>
+<div class="flex flex-col justify-center">
+<span class="text-[10px] font-bold font-label text-primary uppercase tracking-widest mb-1">Dec 15, 2024</span>
+<h4 class="font-bold text-base text-on-surface leading-tight mb-1">Nyem-Nyem Fest</h4>
+<p class="text-xs text-on-surface-variant line-clamp-2 font-body leading-relaxed">Commemorating the resistance of the people of Galim-Tignère.</p>
+<div class="mt-2 flex items-center gap-1 text-stone-500">
+<span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span>
+<span class="text-[10px]">Adamawa Region</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Discover Section (Bento style) -->
+<section class="pb-10">
+<h2 class="font-headline text-xl font-bold tracking-tight mb-4">Curated Journeys</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="h-40 rounded-2xl bg-tertiary-container/10 p-4 border border-tertiary-container/20 flex flex-col justify-between">
+<span class="material-symbols-outlined text-tertiary" data-icon="restaurant">restaurant</span>
+<div>
+<p class="text-xs font-bold font-label uppercase text-tertiary">Food Tours</p>
+<p class="text-sm font-headline font-bold">Culinary Roots</p>
+</div>
+</div>
+<div class="h-40 rounded-2xl bg-secondary-container/10 p-4 border border-secondary-container/20 flex flex-col justify-between">
+<span class="material-symbols-outlined text-secondary" data-icon="museum">museum</span>
+<div>
+<p class="text-xs font-bold font-label uppercase text-secondary">Art Walk</p>
+<p class="text-sm font-headline font-bold">Bronze Castings</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-[#12140e]/80 backdrop-blur-lg dark:bg-[#12140e]/80 rounded-t-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.6)]">
+<div class="flex flex-col items-center justify-center text-stone-400 hover:bg-white/5 transition-all px-3 py-1">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-bold Plus Jakarta Sans uppercase tracking-widest mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 hover:bg-white/5 transition-all px-3 py-1">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-[10px] font-bold Plus Jakarta Sans uppercase tracking-widest mt-1">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 hover:bg-white/5 transition-all px-3 py-1">
+<span class="material-symbols-outlined" data-icon="volunteer_activism">volunteer_activism</span>
+<span class="text-[10px] font-bold Plus Jakarta Sans uppercase tracking-widest mt-1">Contribute</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#e9c349] bg-[#e9c349]/10 rounded-xl px-3 py-1 active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="event" style="font-variation-settings: 'FILL' 1;">event</span>
+<span class="text-[10px] font-bold Plus Jakarta Sans uppercase tracking-widest mt-1">Events</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 hover:bg-white/5 transition-all px-3 py-1">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-bold Plus Jakarta Sans uppercase tracking-widest mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

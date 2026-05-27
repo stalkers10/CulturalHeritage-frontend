@@ -1,0 +1,75 @@
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+.glass-card {
+  background: rgba(30, 32, 26, 0.4) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.scrim-bottom {
+  background: linear-gradient(transparent, rgba(18, 20, 14, 0.9));
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+.text-primary { color: var(--ion-color-primary); }
+.text-secondary { color: var(--ion-color-secondary); }
+.text-tertiary { color: var(--ion-color-tertiary); }
+.text-medium { color: var(--ion-color-medium); }
+
+.bg-surface-container { background-color: #1e201a; }
+.bg-surface-container-low { background-color: #1a1c16; }
+.bg-surface-container-high { background-color: #292b24; }
+.bg-surface-container-highest { background-color: #34362e; }
+
+.italic { font-style: italic; }
+.uppercase { text-transform: uppercase; }
+.tracking-widest { letter-spacing: 0.1em; }
+.tracking-tight { letter-spacing: -0.02em; }
+
+ion-content {
+  --background: var(--ion-background-color);
+}
+
+ion-toolbar {
+  --background: var(--ion-toolbar-background);
+  --color: var(--ion-toolbar-color);
+  --border-style: none;
+}
+
+ion-title {
+  font-family: 'Newsreader', serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+ion-button {
+  --border-radius: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

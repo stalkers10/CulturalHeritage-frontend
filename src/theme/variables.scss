@@ -1,0 +1,115 @@
+/**
+ * Heritage & Horizon Design System
+ */
+
+:root {
+  /** Primary **/
+  --ion-color-primary: #e9c349;
+  --ion-color-primary-rgb: 233, 195, 73;
+  --ion-color-primary-contrast: #3c2f00;
+  --ion-color-primary-contrast-rgb: 60, 47, 0;
+  --ion-color-primary-shade: #cdac40;
+  --ion-color-primary-tint: #ebc95b;
+
+  /** Secondary **/
+  --ion-color-secondary: #ffb4a8;
+  --ion-color-secondary-rgb: 255, 180, 168;
+  --ion-color-secondary-contrast: #690000;
+  --ion-color-secondary-contrast-rgb: 105, 0, 0;
+  --ion-color-secondary-shade: #e09e94;
+  --ion-color-secondary-tint: #ffbc11;
+
+  /** Tertiary **/
+  --ion-color-tertiary: #a8d1a9;
+  --ion-color-tertiary-rgb: 168, 209, 169;
+  --ion-color-tertiary-contrast: #13371b;
+  --ion-color-tertiary-contrast-rgb: 19, 55, 27;
+  --ion-color-tertiary-shade: #94b895;
+  --ion-color-tertiary-tint: #b1d6b2;
+
+  /** Success **/
+  --ion-color-success: #2fdf75;
+  --ion-color-success-rgb: 47, 223, 117;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #29c467;
+  --ion-color-success-tint: #44e283;
+
+  /** Warning **/
+  --ion-color-warning: #ffd534;
+  --ion-color-warning-rgb: 255, 213, 52;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #e0bb2e;
+  --ion-color-warning-tint: #ffd948;
+
+  /** Danger **/
+  --ion-color-danger: #ffb4ab;
+  --ion-color-danger-rgb: 255, 180, 171;
+  --ion-color-danger-contrast: #690005;
+  --ion-color-danger-contrast-rgb: 105, 0, 5;
+  --ion-color-danger-shade: #e09e96;
+  --ion-color-danger-tint: #ffbc13;
+
+  /** Dark **/
+  --ion-color-dark: #e3e3d9;
+  --ion-color-dark-rgb: 227, 227, 217;
+  --ion-color-dark-contrast: #12140e;
+  --ion-color-dark-contrast-rgb: 18, 20, 14;
+  --ion-color-dark-shade: #c8c8bf;
+  --ion-color-dark-tint: #e6e6dd;
+
+  /** Medium **/
+  --ion-color-medium: #8d928c;
+  --ion-color-medium-rgb: 141, 146, 140;
+  --ion-color-medium-contrast: #000000;
+  --ion-color-medium-contrast-rgb: 0, 0, 0;
+  --ion-color-medium-shade: #7c807b;
+  --ion-color-medium-tint: #989d98;
+
+  /** Light **/
+  --ion-color-light: #34362e;
+  --ion-color-light-rgb: 52, 54, 46;
+  --ion-color-light-contrast: #e3e3d9;
+  --ion-color-light-contrast-rgb: 227, 227, 217;
+  --ion-color-light-shade: #2e3029;
+  --ion-color-light-tint: #484a43;
+}
+
+body {
+  --ion-background-color: #12140e;
+  --ion-background-color-rgb: 18, 20, 14;
+
+  --ion-text-color: #e3e3d9;
+  --ion-text-color-rgb: 227, 227, 217;
+
+  --ion-border-color: #434843;
+
+  --ion-item-background: #1e201a;
+  --ion-item-color: #e3e3d9;
+
+  --ion-toolbar-background: #12140e;
+  --ion-toolbar-color: #e9c349;
+
+  --ion-tab-bar-background: #12140e;
+  --ion-tab-bar-color: #8d928c;
+  --ion-tab-bar-color-selected: #e9c349;
+
+  font-family: 'Manrope', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Newsreader', serif;
+}
+
+.font-headline {
+  font-family: 'Newsreader', serif;
+}
+
+.font-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-display {
+  font-family: 'Public Sans', sans-serif;
+}

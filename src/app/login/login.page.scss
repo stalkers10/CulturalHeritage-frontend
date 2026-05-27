@@ -1,0 +1,199 @@
+.login-overlay {
+  background-image: linear-gradient(to bottom, rgba(18, 20, 14, 0.7), rgba(18, 20, 14, 0.95)), url('https://lh3.googleusercontent.com/aida/ADBb0ugOQh-uo_kGlmxr_FluiIeN_WqMCJ65i09gJbFNNi5TidBRjvDS6bDEV_sTrD37VN2K5eXnDs4mIj6scRBnZOIEtyJSGgacOk-wdzXH4p3cJWDjab1MOzosN1mVF2Xv3YNFI2iDScHr_Z3f_No5fA7P2atIbjJOdLbdCS8tsjKmgxSY_NJk3azy5YYtdTor-x6ZALKsmTYbzOmPFbpBq4wM8oEFA6YPmgtaifrqysqsZZDABntg9Jb-kGE');
+  background-size: cover;
+  background-position: center;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container {
+  padding: 40px 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 450px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header-section {
+  text-align: center;
+  padding-top: 40px;
+
+  h1 {
+    font-size: 2rem;
+    letter-spacing: 0.2em;
+    color: var(--ion-color-primary);
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin: 0;
+    font-family: 'Public Sans', serif;
+    font-weight: 800;
+
+    span {
+      color: var(--ion-color-primary-tint);
+    }
+  }
+
+  .accent-line {
+    margin: 16px auto 0;
+    width: 64px;
+    height: 2px;
+    background: rgba(233, 195, 73, 0.4);
+    border-radius: 9999px;
+  }
+}
+
+.form-cluster {
+  margin-top: 40px;
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid rgba(77, 70, 53, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
+  .input-group {
+    margin-bottom: 24px;
+
+    label {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--ion-color-medium);
+      margin-bottom: 8px;
+      margin-left: 4px;
+    }
+  }
+}
+
+.custom-input {
+  --background: rgba(30, 32, 26, 0.4);
+  --border-radius: 8px;
+  --padding-start: 12px;
+  --inner-padding-end: 12px;
+  border: 1px solid rgba(77, 70, 53, 0.3);
+  
+  &.item-has-focus {
+    border-color: var(--ion-color-primary);
+  }
+
+  span[slot="start"] {
+    color: var(--ion-color-medium);
+    margin-right: 12px;
+  }
+
+  ion-input {
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.9rem;
+    color: var(--ion-text-color);
+  }
+}
+
+.view-password {
+  --color: var(--ion-color-medium);
+  margin: 0;
+  
+  span {
+    font-size: 1.1rem;
+  }
+}
+
+.enter-button {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+  --border-radius: 20px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-top: 16px;
+  
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding: 0 8px;
+
+  .remember-me {
+    --background: transparent;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    font-size: 0.75rem;
+    color: var(--ion-color-medium);
+
+    ion-checkbox {
+      --size: 16px;
+      --border-radius: 4px;
+      margin-right: 8px;
+    }
+  }
+
+  a {
+    font-size: 0.75rem;
+    color: rgba(233, 195, 73, 0.8);
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+.footer-section {
+  text-align: center;
+  padding-bottom: 40px;
+  margin-top: 32px;
+
+  p {
+    font-size: 0.9rem;
+    color: var(--ion-color-medium);
+    letter-spacing: 0.02em;
+  }
+
+  .join-link {
+    color: var(--ion-color-primary);
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 4px;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+  }
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 32px;
+  opacity: 0.6;
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--ion-color-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(77, 70, 53, 0.4);
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: var(--ion-color-light-shade);
+    }
+
+    span {
+      font-size: 1.1rem;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "culturalheritage",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
