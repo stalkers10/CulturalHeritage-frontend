@@ -1,0 +1,88 @@
+
+<ion-content [fullscreen]="true" class="home-shell">
+  <app-header *ngIf="homeContent" [title]="appTitle" [profileImageUrl]="profileImageUrl"></app-header>
+
+  <div *ngIf="isLoading" class="home-state">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="home-state">
+    <p>{{ errorMessage }}</p>
+    <button type="button" class="retry-button" (click)="loadHomeContent()">
+      <span class="material-symbols-outlined">refresh</span>
+    </button>
+  </div>
+
+  <main *ngIf="!isLoading && !errorMessage && homeContent" class="home-main">
+    <section *ngIf="searchPlaceholder" class="search-panel">
+      <span class="material-symbols-outlined">search</span>
+      <input [(ngModel)]="searchTerm" [placeholder]="searchPlaceholder" type="search" />
+    </section>
+
+    <section *ngIf="featuredItem as featured" class="featured-card">
+      <img *ngIf="featured.imageUrl" [src]="resolveMediaUrl(featured.imageUrl)" [alt]="featured.title" />
+      <div class="featured-scrim"></div>
+
+      <div class="featured-content">
+        <span *ngIf="featured.eyebrow" class="eyebrow">{{ featured.eyebrow }}</span>
+        <h2>{{ featured.title }}</h2>
+        <p *ngIf="featured.description">{{ featured.description }}</p>
+        <a *ngIf="featured.actionLabel" class="primary-action" [routerLink]="featured.actionRoute || '/tabs/explore'">
+          {{ featured.actionLabel }}
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <section *ngIf="trendingSection as section" class="content-section" [class.empty-section]="itemsForSection(section.key).length === 0">
+      <div class="section-heading">
+        <h3>{{ section.title }}</h3>
+        <a *ngIf="section.actionLabel" [routerLink]="section.actionRoute || '/tabs/explore'">{{ section.actionLabel }}</a>
+      </div>
+
+      <div class="trending-rail no-scrollbar">
+        <a
+          *ngFor="let item of itemsForSection(section.key); trackBy: trackHomeItem"
+          class="trending-card"
+          [routerLink]="item.actionRoute || '/tabs/explore'">
+          <div class="trending-image">
+            <img *ngIf="item.imageUrl" [src]="resolveMediaUrl(item.imageUrl)" [alt]="item.title" />
+            <div class="image-overlay"></div>
+            <span *ngIf="item.icon" class="floating-icon material-symbols-outlined">{{ item.icon }}</span>
+          </div>
+          <h4>{{ item.title }}</h4>
+          <p *ngIf="item.meta">{{ item.meta }}</p>
+        </a>
+      </div>
+    </section>
+
+    <section *ngIf="recommendedSection as section" class="content-section" [class.empty-section]="itemsForSection(section.key).length === 0">
+      <div class="section-heading">
+        <h3>{{ section.title }}</h3>
+        <a *ngIf="section.actionLabel" [routerLink]="section.actionRoute || '/tabs/explore'">{{ section.actionLabel }}</a>
+      </div>
+
+      <div class="recommended-grid">
+        <a
+          *ngFor="let item of itemsForSection(section.key); let first = first; trackBy: trackHomeItem"
+          class="recommendation-card glass-card"
+          [class.featured-recommendation]="first && !!item.imageUrl"
+          [routerLink]="item.actionRoute || '/tabs/explore'">
+          <div *ngIf="item.imageUrl; else iconRecommendation" class="recommendation-image">
+            <img [src]="resolveMediaUrl(item.imageUrl)" [alt]="item.title" />
+          </div>
+
+          <ng-template #iconRecommendation>
+            <span *ngIf="item.icon" class="card-icon material-symbols-outlined">{{ item.icon }}</span>
+          </ng-template>
+
+          <div class="recommendation-copy">
+            <span *ngIf="item.eyebrow" class="small-eyebrow">{{ item.eyebrow }}</span>
+            <h4>{{ item.title }}</h4>
+            <p *ngIf="item.description">{{ item.description }}</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+</ion-content>

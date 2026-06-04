@@ -1,11 +1,15 @@
-<header class="bg-[#12140e] flex justify-between items-center px-6 py-4 w-full z-50 sticky top-0 border-b border-primary/10">
-  <div class="flex items-center gap-4">
-    <button class="text-primary hover:bg-white/5 p-2 rounded-full transition-all active:scale-95 duration-200">
+<header class="top-app-bar">
+  <div class="brand-lockup">
+    <button type="button" class="icon-button" aria-label="Open menu">
       <span class="material-symbols-outlined">menu</span>
     </button>
-    <h1 class="text-2xl font-headline text-primary tracking-tight">Heritage & Horizon</h1>
+    <h1>{{ displayTitle }}</h1>
   </div>
-  <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
-    <img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTVK5ZXR9Z9GyGut6Bt8JzQFnELkyMqnxHbpZbsMM_DDCWLq8HU-DeDN44fyE4Zt4yOD6g_evQwXFE4outW9c_S7N-Ro7FwAjw09nSODmEJE-9nZBDuLIFtWV79_g6cSY5pNmebaEFraWKRt_g43fJdy8ji6t0fgHTSEp9TZkZlu_P6XKRBJrGBGvPc0cW5sI67IHLEaUuqp2a9m76J0FUXPCkRyyemEtChA1rOiLIdRja3U0WGTnSdnCpWmXmNc7rWMXbHQd0r6qG"/>
-  </div>
+
+  <a *ngIf="showAvatar" class="profile-avatar" routerLink="/tabs/profile" aria-label="Open profile">
+    <img *ngIf="displayProfileImageUrl; else avatarFallback" [src]="displayProfileImageUrl" [alt]="displayTitle" />
+    <ng-template #avatarFallback>
+      <span class="material-symbols-outlined">person</span>
+    </ng-template>
+  </a>
 </header>

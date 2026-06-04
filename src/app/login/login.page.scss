@@ -22,14 +22,14 @@
   text-align: center;
   padding-top: 40px;
 
-  h1 {
+  .login-title {
     font-size: 2rem;
     letter-spacing: 0.2em;
     color: var(--ion-color-primary);
     text-transform: uppercase;
     line-height: 1.2;
     margin: 0;
-    font-family: 'Public Sans', serif;
+    font-family: var(--app-font-family);
     font-weight: 800;
 
     span {
@@ -48,20 +48,25 @@
 
 .form-cluster {
   margin-top: 40px;
+  background: rgba(30, 32, 26, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   padding: 32px;
-  border-radius: 16px;
+  border-radius: 8px;
   border: 1px solid rgba(77, 70, 53, 0.2);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 
   .input-group {
     margin-bottom: 24px;
 
-    label {
+    .field-label {
       display: block;
       font-size: 0.7rem;
       color: var(--ion-color-medium);
       margin-bottom: 8px;
       margin-left: 4px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
   }
 }
@@ -85,7 +90,7 @@
   ion-input {
     --padding-top: 16px;
     --padding-bottom: 16px;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--app-font-family);
     font-size: 0.9rem;
     color: var(--ion-text-color);
   }
@@ -133,6 +138,11 @@
     }
   }
 
+  .remember-label {
+    font-size: 0.75rem;
+    color: var(--ion-color-medium);
+  }
+
   a {
     font-size: 0.75rem;
     color: rgba(233, 195, 73, 0.8);
@@ -143,6 +153,10 @@
       color: var(--ion-color-primary);
     }
   }
+
+  .forgot-link {
+    font-family: var(--app-font-family);
+  }
 }
 
 .footer-section {
@@ -150,7 +164,7 @@
   padding-bottom: 40px;
   margin-top: 32px;
 
-  p {
+  .footer-prompt {
     font-size: 0.9rem;
     color: var(--ion-color-medium);
     letter-spacing: 0.02em;

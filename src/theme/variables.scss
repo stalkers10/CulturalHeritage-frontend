@@ -3,6 +3,9 @@
  */
 
 :root {
+  --app-font-family: "Tw Cen MT", "Tw Cent MT", "Century Gothic", Arial, sans-serif;
+  --ion-font-family: var(--app-font-family);
+
   /** Primary **/
   --ion-color-primary: #e9c349;
   --ion-color-primary-rgb: 233, 195, 73;
@@ -95,21 +98,9 @@ body {
   --ion-tab-bar-color: #8d928c;
   --ion-tab-bar-color-selected: #e9c349;
 
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--app-font-family);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Newsreader', serif;
-}
-
-.font-headline {
-  font-family: 'Newsreader', serif;
-}
-
-.font-label {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-.font-display {
-  font-family: 'Public Sans', sans-serif;
+  font-family: var(--app-font-family);
 }

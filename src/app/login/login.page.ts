@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { finalize } from 'rxjs';
 import { ApiService } from '../services/api.service';
@@ -9,18 +9,16 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./login.page.scss'],
   standalone:false
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
+  private readonly router = inject(Router);
+  private readonly apiService = inject(ApiService);
+
   loginData = {
     email: '',
     password: ''
   };
   showPassword = false;
   isSubmitting = false;
-
-  constructor(private router: Router, private apiService: ApiService) { }
-
-  ngOnInit() {
-  }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -53,7 +51,8 @@ export class LoginPage implements OnInit {
         if (response.status === 'otp_sent') {
           const pendingOtpContext = {
             userId: String(response.userId),
-            email: response.email || credentials.email
+            email: response.email || credentials.email,
+            expiresAt: response.expiresAt || new Date(Date.now() + 4 * 60 * 1000).toISOString()
           };
 
           this.apiService.setPendingOtpContext(pendingOtpContext);
@@ -69,11 +68,15 @@ export class LoginPage implements OnInit {
           this.router.navigate(['/otp'], navigationExtras);
         } else {
           this.apiService.clearPendingOtpContext();
-          this.router.navigate(['/tabs/tab1'], { replaceUrl: true });
+          if (response.token && response.user) {
+            this.apiService.setAuthSession({ token: response.token, user: response.user });
+          }
+          this.router.navigate(['/tabs/home'], { replaceUrl: true });
         }
       },
       error: (err) => {
-        alert(err.error?.message || 'Login failed. Please check your connection.');
+        console.error('Login failed:', err);
+        alert(this.apiService.formatHttpError(err, 'Login failed'));
       }
     });
   }

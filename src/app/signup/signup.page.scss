@@ -14,6 +14,11 @@
   }
 }
 
+.signup-title {
+  font-family: var(--app-font-family);
+  letter-spacing: 0;
+}
+
 .signup-content {
   display: flex;
   flex-direction: column;
@@ -43,18 +48,19 @@
     padding: 0 24px;
 
     h1 {
-      font-family: 'Public Sans', serif;
+      font-family: var(--app-font-family);
       font-weight: 800;
       font-size: 2.5rem;
       color: var(--ion-color-primary);
       margin-bottom: 8px;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
     }
 
-    p {
+    .hero-kicker {
       color: var(--ion-color-medium);
       font-size: 0.7rem;
       letter-spacing: 0.15em;
+      text-transform: uppercase;
     }
   }
 }
@@ -71,19 +77,25 @@
 }
 
 .signup-card {
+  background: rgba(30, 32, 26, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 32px;
-  border-radius: 16px;
+  border-radius: 8px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 
   .input-group {
     margin-bottom: 24px;
 
-    label {
+    .field-label {
       display: block;
       font-size: 0.65rem;
       color: var(--ion-color-medium);
       margin-bottom: 8px;
       margin-left: 4px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
   }
 }
@@ -108,7 +120,7 @@
   ion-input {
     --padding-top: 14px;
     --padding-bottom: 14px;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--app-font-family);
     font-size: 0.9rem;
     --border-radius:10px ;
   }
@@ -135,7 +147,7 @@
       margin-right: 12px;
     }
 
-    ion-label {
+    .terms-label {
       font-size: 0.8rem;
       color: var(--ion-color-medium);
       white-space: normal;
@@ -164,13 +176,18 @@
   }
 }
 
+.button-label {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .footer-links {
   margin-top: 40px;
   padding-top: 24px;
   border-top: 1px solid rgba(77, 70, 53, 0.3);
   text-align: center;
 
-  p {
+  .signin-prompt {
     font-size: 0.9rem;
     color: var(--ion-color-medium);
     margin-bottom: 24px;
@@ -212,6 +229,10 @@
       font-size: 1.1rem;
       margin-right: 8px;
     }
+
+    .social-label {
+      font-size: 0.75rem;
+    }
   }
 }
 
@@ -234,13 +255,13 @@
   .bento-item {
     position: relative;
     height: 192px;
-    border-radius: 16px;
+    border-radius: 8px;
     overflow: hidden;
     
     img {
       width: 100%;
       height: 100%;
-      object-cover: cover;
+      object-fit: cover;
       transition: transform 0.7s;
     }
 
@@ -278,7 +299,7 @@
   text-align: center;
   border-top: 1px solid rgba(77, 70, 53, 0.1);
 
-  p {
+  .footer-title {
     font-size: 0.75rem;
     color: var(--ion-color-medium);
     letter-spacing: 0.15em;

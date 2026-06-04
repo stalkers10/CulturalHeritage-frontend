@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { ApiService } from '../services/api.service';
@@ -10,19 +10,18 @@ import { ApiService } from '../services/api.service';
   standalone: false
 })
 export class OtpPage implements OnInit, OnDestroy {
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly apiService = inject(ApiService);
+
   userId: string = '';
   email: string = '';
+  expiresAt: string = '';
   otpCode: string = '';
   timeLeft: number = 240; // 4 minutes in seconds
   timer: any;
   displayTime: string = '04:00';
   isVerifying = false;
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private apiService: ApiService
-  ) { }
 
   ngOnInit() {
     const params = this.route.snapshot.queryParamMap;
@@ -30,6 +29,7 @@ export class OtpPage implements OnInit, OnDestroy {
 
     this.userId = params.get('userId') || storedContext?.userId || '';
     this.email = params.get('email') || storedContext?.email || '';
+    this.expiresAt = storedContext?.expiresAt || new Date(Date.now() + 4 * 60 * 1000).toISOString();
 
     if (!this.userId) {
       alert('Your verification session was lost. Please login again.');
@@ -39,7 +39,8 @@ export class OtpPage implements OnInit, OnDestroy {
 
     this.apiService.setPendingOtpContext({
       userId: this.userId,
-      email: this.email
+      email: this.email,
+      expiresAt: this.expiresAt
     });
 
     this.formatTime();
@@ -57,12 +58,13 @@ export class OtpPage implements OnInit, OnDestroy {
       clearInterval(this.timer);
     }
 
-    this.timeLeft = 240;
+    this.updateTimeLeft();
     this.formatTime();
 
     this.timer = setInterval(() => {
+      this.updateTimeLeft();
+
       if (this.timeLeft > 0) {
-        this.timeLeft--;
         this.formatTime();
       } else {
         clearInterval(this.timer);
@@ -71,6 +73,17 @@ export class OtpPage implements OnInit, OnDestroy {
         this.router.navigate(['/login'], { replaceUrl: true });
       }
     }, 1000);
+  }
+
+  updateTimeLeft() {
+    const expiryTime = Date.parse(this.expiresAt);
+
+    if (Number.isNaN(expiryTime)) {
+      this.timeLeft = 0;
+      return;
+    }
+
+    this.timeLeft = Math.max(0, Math.ceil((expiryTime - Date.now()) / 1000));
   }
 
   formatTime() {
@@ -122,7 +135,10 @@ export class OtpPage implements OnInit, OnDestroy {
     ).subscribe({
       next: (response) => {
         this.apiService.clearPendingOtpContext();
-        this.router.navigate(['/tabs/tab1'], { replaceUrl: true });
+        if (response.token && response.user) {
+          this.apiService.setAuthSession({ token: response.token, user: response.user });
+        }
+        this.router.navigate(['/tabs/home'], { replaceUrl: true });
       },
       error: (err) => {
         alert(err.error?.message || 'Invalid code. Please try again.');

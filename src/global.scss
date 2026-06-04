@@ -16,6 +16,26 @@
 
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+:root {
+  --app-font-family: "Tw Cen MT", "Tw Cent MT", "Century Gothic", Arial, sans-serif;
+}
+
+html,
+body,
+ion-app,
+ion-content,
+ion-toolbar,
+ion-title,
+ion-label,
+ion-button,
+ion-input,
+ion-textarea,
+input,
+textarea,
+button {
+  font-family: var(--app-font-family);
+}
+
 .glass-card {
   background: rgba(30, 32, 26, 0.4) !important;
   backdrop-filter: blur(16px);
@@ -42,11 +62,6 @@
 .bg-surface-container-high { background-color: #292b24; }
 .bg-surface-container-highest { background-color: #34362e; }
 
-.italic { font-style: italic; }
-.uppercase { text-transform: uppercase; }
-.tracking-widest { letter-spacing: 0.1em; }
-.tracking-tight { letter-spacing: -0.02em; }
-
 ion-content {
   --background: var(--ion-background-color);
 }
@@ -58,14 +73,14 @@ ion-toolbar {
 }
 
 ion-title {
-  font-family: 'Newsreader', serif;
+  font-family: var(--app-font-family);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 ion-button {
   --border-radius: 12px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--app-font-family);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;

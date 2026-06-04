@@ -1,0 +1,119 @@
+<ion-content [fullscreen]="true" class="contribute-shell">
+  <app-header></app-header>
+
+  <main class="contribute-main">
+    <section class="contribute-hero">
+      <h2>Share Your Knowledge</h2>
+      <p>
+        Become a Digital Griot. Contribute your stories, traditions, and memories to preserve the living history of Cameroon for generations to come.
+      </p>
+    </section>
+
+    <div class="contribute-layout">
+      <section class="contribution-form-panel">
+        <div class="panel-accent"></div>
+
+        <form class="contribution-form" (ngSubmit)="submitContribution()">
+          <div class="form-field">
+            <label class="field-label" for="tribe">Tribe name</label>
+            <input
+              class="field-control"
+              id="tribe"
+              name="tribe"
+              [(ngModel)]="contributionForm.tribe"
+              placeholder="e.g. Bamileke, Duala, Bakweri..."
+              type="text" />
+          </div>
+
+          <div class="form-field">
+            <label class="field-label" for="story">Your story...</label>
+            <textarea
+              class="field-control story-control"
+              id="story"
+              name="story"
+              [(ngModel)]="contributionForm.story"
+              placeholder="Describe a tradition, legend, or historical event..."
+              rows="6"></textarea>
+          </div>
+
+          <div class="media-field">
+            <span class="field-label">Attach Media</span>
+
+            <input type="file" #photoInput (change)="onFileSelected($event, 'photo')" accept="image/*" capture="environment" class="visually-hidden">
+            <input type="file" #audioInput (change)="onFileSelected($event, 'audio')" accept="audio/*" capture="microphone" class="visually-hidden">
+            <input type="file" #videoInput (change)="onFileSelected($event, 'video')" accept="video/*" capture="environment" class="visually-hidden">
+
+            <div class="media-grid">
+              <button (click)="photoInput.click()" [class.media-selected]="contributionForm.mediaType === 'photo'" class="media-option" type="button">
+                <span class="media-icon material-symbols-outlined">photo_camera</span>
+                <span class="media-label">Photo</span>
+              </button>
+              <button (click)="audioInput.click()" [class.media-selected]="contributionForm.mediaType === 'audio'" class="media-option" type="button">
+                <span class="media-icon material-symbols-outlined">mic</span>
+                <span class="media-label">Audio</span>
+              </button>
+              <button (click)="videoInput.click()" [class.media-selected]="contributionForm.mediaType === 'video'" class="media-option" type="button">
+                <span class="media-icon material-symbols-outlined">videocam</span>
+                <span class="media-label">Video</span>
+              </button>
+            </div>
+
+            <div *ngIf="selectedFileName" class="selected-file">
+              <span class="material-symbols-outlined">attachment</span>
+              Selected: {{ selectedFileName }}
+            </div>
+          </div>
+
+          <button class="submit-button" type="submit" [disabled]="isSubmitting">
+            <span>{{ isSubmitting ? 'Submitting...' : 'Submit Contribution' }}</span>
+            <span class="material-symbols-outlined">send</span>
+          </button>
+        </form>
+      </section>
+
+      <aside class="recent-panel">
+        <h3>Recent Contributions</h3>
+
+        <div class="contribution-list">
+          <article *ngFor="let item of contributions" class="contribution-card">
+            <div class="contribution-card-header">
+              <h4>{{ item.tribe }}</h4>
+              <span
+                [class.status-approved]="item.status === 'Approved'"
+                [class.status-pending]="item.status === 'Pending'"
+                class="status-pill">
+                {{ item.status }}
+              </span>
+            </div>
+
+            <p class="contribution-story">{{ item.story }}</p>
+
+            <div class="contribution-meta">
+              <span class="meta-item">
+                <span class="material-symbols-outlined">calendar_today</span>
+                {{ getTimeAgo(item.created_at) }}
+              </span>
+              <span class="meta-item" *ngIf="item.media_type !== 'none'">
+                <span class="material-symbols-outlined">{{ item.media_type === 'photo' ? 'image' : (item.media_type === 'audio' ? 'audiotrack' : 'movie') }}</span>
+                {{ item.media_type | titlecase }} attached
+              </span>
+            </div>
+
+            <a *ngIf="item.media_url" [href]="getMediaUrl(item.media_url)" target="_blank" rel="noreferrer" class="media-link">
+              <span class="material-symbols-outlined">open_in_new</span>
+              Open media
+            </a>
+          </article>
+
+          <div *ngIf="contributions.length === 0" class="empty-contributions">
+            <p>No recent contributions yet. Be the first!</p>
+          </div>
+        </div>
+
+        <button class="view-submissions-button" type="button">
+          View All Submissions
+        </button>
+      </aside>
+    </div>
+  </main>
+</ion-content>

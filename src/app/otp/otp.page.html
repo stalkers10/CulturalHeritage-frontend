@@ -3,15 +3,15 @@
     <div class="login-container">
       
       <header class="header-section">
-        <h1 class="text-gold-serif">
+        <h1 class="otp-title">
           VERIFY YOUR <br/> <span>IDENTITY</span>
         </h1>
         <div class="accent-line"></div>
       </header>
 
-      <div class="form-cluster glass-card">
+      <div class="form-cluster">
         <div class="otp-info">
-          <p class="font-label uppercase tracking-widest">A 6-digit code was sent to:</p>
+          <p class="otp-kicker">A 6-digit code was sent to:</p>
           <p class="email-display">{{ email }}</p>
         </div>
 
@@ -22,7 +22,7 @@
 
         <form (ngSubmit)="onVerify()">
           <div class="input-group">
-            <label class="font-label uppercase tracking-widest">Verification Code</label>
+            <label class="field-label">Verification Code</label>
             <ion-item lines="none" class="custom-input">
               <span class="material-symbols-outlined" slot="start">verified_user</span>
               <ion-input 
@@ -47,7 +47,7 @@
         </form>
 
         <div class="form-footer">
-          <p class="font-label">Didn't get the code? <a (click)="goBackToLogin()">Go back to login</a></p>
+          <p class="footer-note">Didn't get the code? <a (click)="goBackToLogin()">Go back to login</a></p>
         </div>
       </div>
 

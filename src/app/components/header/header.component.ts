@@ -1,17 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { IonToolbar, IonItemDivider, IonLabel, IonAvatar } from "@ionic/angular/standalone";
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: true,
-  imports: [IonAvatar, IonToolbar, IonItemDivider, IonLabel],
+  imports: [CommonModule, RouterLink],
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  @Input() title = 'Heritage & Horizon';
+  @Input() profileImageUrl = '';
+  @Input() showAvatar = true;
 
-  constructor() { }
+  get displayTitle(): string {
+    return this.title?.trim() || 'Heritage & Horizon';
+  }
 
-  ngOnInit() { }
-
+  get displayProfileImageUrl(): string {
+    return this.profileImageUrl?.trim() || '';
+  }
 }

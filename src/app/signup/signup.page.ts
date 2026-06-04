@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./signup.page.scss'],
   standalone:false
 })
-export class SignupPage implements OnInit {
+export class SignupPage {
+  private readonly router = inject(Router);
+  private readonly apiService = inject(ApiService);
+
   signupData = {
     fullName: '',
     email: '',
@@ -16,28 +20,46 @@ export class SignupPage implements OnInit {
     agreeTerms: false
   };
   showPassword = false;
-
-  constructor(private router: Router, private apiService: ApiService) { }
-
-  ngOnInit() {
-  }
+  isSubmitting = false;
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
   onSignup() {
-    console.log('Signup attempt:', this.signupData);
-    
-    this.apiService.signup(this.signupData).subscribe({
+    if (this.isSubmitting) {
+      return;
+    }
+
+    const signupData = {
+      fullName: this.signupData.fullName.trim(),
+      email: this.signupData.email.trim().toLowerCase(),
+      password: this.signupData.password,
+      agreeTerms: this.signupData.agreeTerms
+    };
+
+    if (!signupData.fullName || !signupData.email || !signupData.password || !signupData.agreeTerms) {
+      alert('Please complete the form before continuing.');
+      return;
+    }
+
+    this.isSubmitting = true;
+
+    this.apiService.signup(signupData).pipe(
+      finalize(() => {
+        this.isSubmitting = false;
+      })
+    ).subscribe({
       next: (response) => {
-        console.log('Signup successful:', response);
+        if (response.token && response.user) {
+          this.apiService.setAuthSession({ token: response.token, user: response.user });
+        }
         alert('Welcome to the Heritage! Your account has been created.');
-        this.router.navigate(['/tabs/tab1']);
+        this.router.navigate(['/tabs/home'], { replaceUrl: true });
       },
       error: (err) => {
         console.error('Signup failed:', err);
-        alert(err.error?.message || 'Registration failed. Please check your connection.');
+        alert(this.apiService.formatHttpError(err, 'Registration failed'));
       }
     });
   }
