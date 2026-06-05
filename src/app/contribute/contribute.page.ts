@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { finalize } from 'rxjs';
-import { ApiService } from '../services/api.service';
+import { ApiService, Contribution } from '../services/api.service';
 
 @Component({
   selector: 'app-contribute',
@@ -11,7 +11,7 @@ import { ApiService } from '../services/api.service';
 export class ContributePage implements OnInit {
   private readonly apiService = inject(ApiService);
 
-  contributions: any[] = [];
+  contributions: Contribution[] = [];
   contributionForm = {
     tribe: '',
     story: '',
@@ -28,6 +28,10 @@ export class ContributePage implements OnInit {
 
   ionViewWillEnter() {
     this.loadContributions();
+  }
+
+  get isAdmin(): boolean {
+    return this.apiService.isAdmin();
   }
 
   loadContributions() {
@@ -104,7 +108,7 @@ export class ContributePage implements OnInit {
       })
     ).subscribe({
       next: (res) => {
-        alert('Contribution submitted successfully!');
+        alert(res?.message || 'Contribution submitted successfully!');
         this.contributionForm = { tribe: '', story: '', mediaType: 'none' };
         this.selectedFile = null;
         this.selectedFileName = '';

@@ -18,7 +18,8 @@ export class OtpPage implements OnInit, OnDestroy {
   email: string = '';
   expiresAt: string = '';
   otpCode: string = '';
-  timeLeft: number = 240; // 4 minutes in seconds
+  mode: 'login' | 'reset' = 'login';
+  timeLeft: number = 240;
   timer: any;
   displayTime: string = '04:00';
   isVerifying = false;
@@ -30,6 +31,7 @@ export class OtpPage implements OnInit, OnDestroy {
     this.userId = params.get('userId') || storedContext?.userId || '';
     this.email = params.get('email') || storedContext?.email || '';
     this.expiresAt = storedContext?.expiresAt || new Date(Date.now() + 4 * 60 * 1000).toISOString();
+    this.mode = (params.get('mode') as 'login' | 'reset') || 'login';
 
     if (!this.userId) {
       alert('Your verification session was lost. Please login again.');
@@ -100,7 +102,8 @@ export class OtpPage implements OnInit, OnDestroy {
 
   goBackToLogin() {
     this.apiService.clearPendingOtpContext();
-    this.router.navigate(['/login'], { replaceUrl: true });
+    const target = this.mode === 'reset' ? '/forgot-password' : '/login';
+    this.router.navigate([target], { replaceUrl: true });
   }
 
   onVerify() {
@@ -109,7 +112,7 @@ export class OtpPage implements OnInit, OnDestroy {
     }
 
     if (!this.userId) {
-      alert('Your verification session was lost. Please login again.');
+      alert('Your verification session was lost. Please try again.');
       this.goBackToLogin();
       return;
     }
@@ -135,10 +138,16 @@ export class OtpPage implements OnInit, OnDestroy {
     ).subscribe({
       next: (response) => {
         this.apiService.clearPendingOtpContext();
-        if (response.token && response.user) {
-          this.apiService.setAuthSession({ token: response.token, user: response.user });
+
+        if (this.mode === 'reset') {
+          this.apiService.setResetToken(response.token);
+          this.router.navigate(['/reset-password'], { replaceUrl: true });
+        } else {
+          if (response.token && response.user) {
+            this.apiService.setAuthSession({ token: response.token, user: response.user });
+          }
+          this.router.navigate(['/tabs/home'], { replaceUrl: true });
         }
-        this.router.navigate(['/tabs/home'], { replaceUrl: true });
       },
       error: (err) => {
         alert(err.error?.message || 'Invalid code. Please try again.');

@@ -1,6 +1,8 @@
-<ion-content [fullscreen]="true" class="contribute-shell">
+<ion-header class="app-page-header">
   <app-header></app-header>
+</ion-header>
 
+<ion-content class="contribute-shell">
   <main class="contribute-main">
     <section class="contribute-hero">
       <h2>Share Your Knowledge</h2>
@@ -65,7 +67,7 @@
           </div>
 
           <button class="submit-button" type="submit" [disabled]="isSubmitting">
-            <span>{{ isSubmitting ? 'Submitting...' : 'Submit Contribution' }}</span>
+            <span>{{ isSubmitting ? 'Submitting...' : (isAdmin ? 'Publish Contribution' : 'Submit Contribution') }}</span>
             <span class="material-symbols-outlined">send</span>
           </button>
         </form>
@@ -110,7 +112,7 @@
           </div>
         </div>
 
-        <button class="view-submissions-button" type="button">
+        <button class="view-submissions-button" type="button" routerLink="/tabs/submissions">
           View All Submissions
         </button>
       </aside>

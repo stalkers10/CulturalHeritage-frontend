@@ -1,3 +1,241 @@
-<ion-content [fullscreen]="true">
+<ion-header class="app-page-header">
   <app-header></app-header>
+</ion-header>
+
+<ion-content class="events-shell">
+  <main class="events-main">
+    <section class="events-hero">
+      <div>
+        <span class="hero-kicker">Cultural Calendar</span>
+        <h2>Events and Reminders</h2>
+        <p>Find upcoming festivals, ceremonies, workshops, and heritage gatherings, then save a phone reminder before they begin.</p>
+      </div>
+    </section>
+
+    <section class="event-submit-panel">
+      <div class="event-submit-heading">
+        <span class="material-symbols-outlined">edit_calendar</span>
+        <div>
+          <h3>Submit an Event</h3>
+          <p>{{ isAdmin ? 'Admin submissions publish immediately.' : 'Community submissions are reviewed before publication.' }}</p>
+        </div>
+      </div>
+
+      <form class="event-submit-form" (ngSubmit)="submitEvent()">
+        <div class="event-form-grid">
+          <label class="event-field">
+            <span>Title</span>
+            <input [(ngModel)]="eventForm.title" name="eventTitle" type="text" autocomplete="off" required />
+          </label>
+
+          <label class="event-field">
+            <span>Category</span>
+            <input [(ngModel)]="eventForm.category" name="eventCategory" type="text" placeholder="Festival, ceremony, workshop..." required />
+          </label>
+
+          <label class="event-field">
+            <span>Region</span>
+            <input [(ngModel)]="eventForm.region" name="eventRegion" type="text" required />
+          </label>
+
+          <label class="event-field">
+            <span>City</span>
+            <input [(ngModel)]="eventForm.city" name="eventCity" type="text" required />
+          </label>
+
+          <label class="event-field">
+            <span>Venue</span>
+            <input [(ngModel)]="eventForm.venue" name="eventVenue" type="text" required />
+          </label>
+
+          <label class="event-field">
+            <span>Start date</span>
+            <input [(ngModel)]="eventForm.eventDate" name="eventDate" type="datetime-local" [min]="minimumEventDateTime" required />
+          </label>
+
+          <label class="event-field">
+            <span>End date</span>
+            <input [(ngModel)]="eventForm.endDate" name="eventEndDate" type="datetime-local" [min]="eventForm.eventDate || minimumEventDateTime" />
+          </label>
+
+          <label class="event-field">
+            <span>Organizer</span>
+            <input [(ngModel)]="eventForm.organizer" name="eventOrganizer" type="text" />
+          </label>
+
+          <label class="event-field">
+            <span>Price label</span>
+            <input [(ngModel)]="eventForm.priceLabel" name="eventPriceLabel" type="text" placeholder="Free entry, registration required..." />
+          </label>
+
+          <label class="event-field">
+            <span>Image URL</span>
+            <input [(ngModel)]="eventForm.imageUrl" name="eventImageUrl" type="url" placeholder="https://..." />
+          </label>
+
+          <label class="event-field event-field-wide">
+            <span>Map URL</span>
+            <input [(ngModel)]="eventForm.mapUrl" name="eventMapUrl" type="url" placeholder="https://www.google.com/maps/..." />
+          </label>
+        </div>
+
+        <label class="event-field">
+          <span>Description</span>
+          <textarea [(ngModel)]="eventForm.description" name="eventDescription" rows="4" maxlength="1200" required></textarea>
+        </label>
+
+        <button type="submit" class="event-submit-button" [disabled]="isSubmittingEvent">
+          <span>{{ isSubmittingEvent ? 'Submitting...' : (isAdmin ? 'Publish event' : 'Submit for review') }}</span>
+          <span class="material-symbols-outlined">{{ isAdmin ? 'publish' : 'send' }}</span>
+        </button>
+      </form>
+    </section>
+
+    <div *ngIf="isLoading" class="events-state">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="events-state">
+      <p>{{ errorMessage }}</p>
+      <button type="button" class="retry-button" (click)="loadEvents()" aria-label="Retry">
+        <span class="material-symbols-outlined">refresh</span>
+      </button>
+    </div>
+
+    <ng-container *ngIf="!isLoading && !errorMessage">
+      <section *ngIf="featuredEvent as event" class="featured-event">
+        <img *ngIf="event.imageUrl" [src]="resolveMediaUrl(event.imageUrl)" [alt]="event.title" />
+        <div class="featured-scrim"></div>
+
+        <div class="featured-copy">
+          <span class="event-chip">{{ event.category }}</span>
+          <h3>{{ event.title }}</h3>
+          <p>{{ event.description }}</p>
+
+          <div class="featured-meta">
+            <span>
+              <span class="material-symbols-outlined">calendar_month</span>
+              {{ formatEventDate(event.eventDate) }}
+            </span>
+            <span>
+              <span class="material-symbols-outlined">location_on</span>
+              {{ event.city }}, {{ event.region }}
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section class="events-toolbar">
+        <form class="events-search" role="search" (submit)="$event.preventDefault()">
+          <span class="material-symbols-outlined">search</span>
+          <input [(ngModel)]="searchTerm" name="eventSearch" placeholder="Search events, regions, cities..." type="search" />
+          <button *ngIf="searchTerm" type="button" (click)="searchTerm = ''" aria-label="Clear search">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </form>
+
+        <div class="category-filter no-scrollbar" aria-label="Event categories">
+          <button type="button" [class.active-filter]="selectedCategory === 'all'" (click)="selectedCategory = 'all'">
+            All
+          </button>
+          <button
+            *ngFor="let category of categories"
+            type="button"
+            [class.active-filter]="selectedCategory === category"
+            (click)="selectedCategory = category">
+            {{ category }}
+          </button>
+        </div>
+      </section>
+
+      <section class="events-list">
+        <article *ngFor="let event of filteredEvents; trackBy: trackEvent" class="event-card">
+          <div class="event-image">
+            <img *ngIf="event.imageUrl" [src]="resolveMediaUrl(event.imageUrl)" [alt]="event.title" />
+          </div>
+
+          <div class="event-copy">
+            <div class="event-header">
+              <div>
+                <span class="event-chip">{{ event.category }}</span>
+                <h3>{{ event.title }}</h3>
+              </div>
+              <span *ngIf="event.priceLabel" class="price-pill">{{ event.priceLabel }}</span>
+            </div>
+
+            <p>{{ event.description }}</p>
+
+            <div class="event-details">
+              <span>
+                <span class="material-symbols-outlined">calendar_month</span>
+                {{ formatEventDate(event.eventDate) }}
+              </span>
+              <span>
+                <span class="material-symbols-outlined">location_on</span>
+                {{ event.venue }}, {{ event.city }}
+              </span>
+              <span *ngIf="event.organizer">
+                <span class="material-symbols-outlined">groups</span>
+                {{ event.organizer }}
+              </span>
+            </div>
+
+            <div class="reminder-panel">
+              <div *ngIf="reminderForEvent(event.id) as reminder" class="saved-reminder">
+                <span class="material-symbols-outlined">notifications_active</span>
+                Reminder set: {{ formatReminder(reminder) }}
+              </div>
+
+              <div class="reminder-controls">
+                <label>
+                  <span>Reminder time</span>
+                  <select [(ngModel)]="selectedReminderOffsets[event.id]" [ngModelOptions]="{ standalone: true }">
+                    <option
+                      *ngFor="let option of reminderOptions"
+                      [ngValue]="option.minutes"
+                      [disabled]="isReminderOptionDisabled(event, option.minutes)">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                </label>
+
+                <button
+                  type="button"
+                  class="reminder-button"
+                  [disabled]="isSavingReminder(event.id)"
+                  (click)="saveReminder(event)">
+                  <span class="material-symbols-outlined">notifications</span>
+                  {{ reminderForEvent(event.id) ? 'Update' : 'Remind me' }}
+                </button>
+
+                <button
+                  *ngIf="reminderForEvent(event.id)"
+                  type="button"
+                  class="cancel-button"
+                  [disabled]="isSavingReminder(event.id)"
+                  (click)="cancelReminder(event)"
+                  aria-label="Cancel reminder">
+                  <span class="material-symbols-outlined">notifications_off</span>
+                </button>
+              </div>
+            </div>
+
+            <a *ngIf="event.mapUrl" class="map-link" [href]="event.mapUrl" target="_blank" rel="noreferrer">
+              Open location
+              <span class="material-symbols-outlined">open_in_new</span>
+            </a>
+          </div>
+        </article>
+
+        <div *ngIf="events.length === 0" class="empty-events">
+          <p>No cultural events have been published yet.</p>
+        </div>
+
+        <div *ngIf="events.length > 0 && filteredEvents.length === 0" class="empty-events">
+          <p>No events match your current search.</p>
+          <button type="button" (click)="searchTerm = ''; selectedCategory = 'all'">Clear filters</button>
+        </div>
+      </section>
+    </ng-container>
+  </main>
 </ion-content>

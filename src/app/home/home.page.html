@@ -1,7 +1,8 @@
-
-<ion-content [fullscreen]="true" class="home-shell">
+<ion-header *ngIf="homeContent" class="app-page-header">
   <app-header *ngIf="homeContent" [title]="appTitle" [profileImageUrl]="profileImageUrl"></app-header>
+</ion-header>
 
+<ion-content class="home-shell">
   <div *ngIf="isLoading" class="home-state">
     <ion-spinner name="crescent"></ion-spinner>
   </div>

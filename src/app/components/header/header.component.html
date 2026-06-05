@@ -1,6 +1,6 @@
 <header class="top-app-bar">
   <div class="brand-lockup">
-    <button type="button" class="icon-button" aria-label="Open menu">
+    <button *ngIf="isAdmin" type="button" class="icon-button" (click)="openAdminMenu()" aria-label="Open admin menu">
       <span class="material-symbols-outlined">menu</span>
     </button>
     <h1>{{ displayTitle }}</h1>

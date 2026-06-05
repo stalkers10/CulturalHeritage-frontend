@@ -47,7 +47,9 @@
         </form>
 
         <div class="form-footer">
-          <p class="footer-note">Didn't get the code? <a (click)="goBackToLogin()">Go back to login</a></p>
+          <p class="footer-note">Didn't get the code?
+            <a (click)="goBackToLogin()">{{ mode === 'reset' ? 'Go back' : 'Go back to login' }}</a>
+          </p>
         </div>
       </div>
 

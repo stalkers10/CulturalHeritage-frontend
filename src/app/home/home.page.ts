@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
     ).subscribe({
       next: (content) => {
         this.homeContent = content;
-      },
+      }, 
       error: (err) => {
         console.error('Error loading home content:', err);
         this.errorMessage = err.error?.message || 'Failed to load home page content';

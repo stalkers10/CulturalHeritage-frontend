@@ -1,0 +1,103 @@
+<ion-header class="app-page-header">
+  <app-header title="Events"></app-header>
+</ion-header>
+
+<ion-content class="admin-shell">
+  <main class="admin-main">
+    <section class="admin-hero">
+      <h2>Pending Events</h2>
+      <p>Approve or reject community-submitted heritage events before they go live.</p>
+    </section>
+
+    <div *ngIf="isLoading" class="admin-state">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="admin-state">
+      <span class="material-symbols-outlined state-icon">error_outline</span>
+      <p>{{ errorMessage }}</p>
+      <button type="button" class="retry-btn" (click)="load()">
+        <span class="material-symbols-outlined">refresh</span>
+        Retry
+      </button>
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage && events.length === 0" class="admin-state">
+      <span class="material-symbols-outlined state-icon">check_circle</span>
+      <p>No pending events. All caught up!</p>
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage && events.length > 0" class="events-list">
+      <p class="list-count">{{ events.length }} pending</p>
+
+      <article
+        *ngFor="let item of events; trackBy: trackById"
+        class="event-card">
+
+        <div class="event-image-wrap" *ngIf="item.imageUrl">
+          <img [src]="getImageUrl(item.imageUrl)" [alt]="item.title" class="event-image" loading="lazy" />
+        </div>
+
+        <div class="event-body">
+          <div class="card-header">
+            <div>
+              <span class="event-category">{{ item.category }}</span>
+              <h3>{{ item.title }}</h3>
+            </div>
+            <span class="status-pill status-pending">Pending</span>
+          </div>
+
+          <div class="event-meta-grid">
+            <span class="meta-item">
+              <span class="material-symbols-outlined">calendar_month</span>
+              {{ formatDate(item.eventDate) }}
+            </span>
+            <span class="meta-item">
+              <span class="material-symbols-outlined">location_on</span>
+              {{ item.city }}, {{ item.region }}
+            </span>
+            <span class="meta-item" *ngIf="item.venue">
+              <span class="material-symbols-outlined">meeting_room</span>
+              {{ item.venue }}
+            </span>
+            <span class="meta-item" *ngIf="item.organizer">
+              <span class="material-symbols-outlined">groups</span>
+              {{ item.organizer }}
+            </span>
+          </div>
+
+          <p class="event-description">{{ item.description }}</p>
+
+          <div class="card-actions">
+            <button
+              type="button"
+              class="action-btn action-approve"
+              [disabled]="processingId === item.id"
+              (click)="approve(item.id)">
+              <ion-spinner *ngIf="processingId === item.id" name="crescent" class="btn-spinner"></ion-spinner>
+              <span *ngIf="processingId !== item.id" class="material-symbols-outlined">check_circle</span>
+              Approve
+            </button>
+            <button
+              type="button"
+              class="action-btn action-reject"
+              [disabled]="processingId === item.id"
+              (click)="reject(item.id)">
+              <span class="material-symbols-outlined">cancel</span>
+              Reject
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <ion-toast
+    [isOpen]="showToast"
+    [message]="toastMessage"
+    [color]="toastColor"
+    duration="2800"
+    position="bottom"
+    (didDismiss)="dismissToast()">
+  </ion-toast>
+</ion-content>

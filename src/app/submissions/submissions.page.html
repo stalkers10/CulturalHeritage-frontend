@@ -1,0 +1,86 @@
+<ion-header class="app-page-header">
+  <app-header title="Submissions"></app-header>
+</ion-header>
+
+<ion-content class="submissions-shell">
+  <main class="submissions-main">
+    <section class="submissions-hero">
+      <a routerLink="/tabs/contribute" class="back-link">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Contribute
+      </a>
+      <h2>All Submissions</h2>
+      <p>Review the stories, media, and cultural knowledge shared by contributors.</p>
+    </section>
+
+    <div *ngIf="isLoading" class="submissions-state">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="submissions-state">
+      <p>{{ errorMessage }}</p>
+      <button type="button" class="retry-button" (click)="loadSubmissions()" aria-label="Retry">
+        <span class="material-symbols-outlined">refresh</span>
+      </button>
+    </div>
+
+    <section *ngIf="!isLoading && !errorMessage" class="submissions-results">
+      <form class="submissions-search" role="search" (submit)="$event.preventDefault()">
+        <span class="material-symbols-outlined">search</span>
+        <input
+          [(ngModel)]="searchTerm"
+          name="submissionSearch"
+          placeholder="Search submissions..."
+          type="search" />
+        <button *ngIf="searchTerm" type="button" (click)="searchTerm = ''" aria-label="Clear search">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </form>
+
+      <div *ngIf="searchTerm && submissions.length > 0" class="search-summary">
+        {{ filteredSubmissions.length }} result{{ filteredSubmissions.length === 1 ? '' : 's' }}
+      </div>
+
+      <div class="submissions-list">
+      <article *ngFor="let item of filteredSubmissions; trackBy: trackSubmission" class="submission-card">
+        <div class="submission-card-header">
+          <div>
+            <span class="submitted-time">{{ getTimeAgo(item.created_at) }}</span>
+            <h3>{{ item.tribe }}</h3>
+          </div>
+          <span
+            [class.status-approved]="item.status === 'Approved'"
+            [class.status-pending]="item.status === 'Pending'"
+            class="status-pill">
+            {{ item.status }}
+          </span>
+        </div>
+
+        <p class="submission-story">{{ item.story }}</p>
+
+        <div class="submission-meta">
+          <span class="meta-item">
+            <span class="material-symbols-outlined">{{ getMediaIcon(item.media_type) }}</span>
+            {{ item.media_type === 'none' ? 'No media' : (item.media_type | titlecase) + ' attached' }}
+          </span>
+        </div>
+
+        <a *ngIf="item.media_url" [href]="getMediaUrl(item.media_url)" target="_blank" rel="noreferrer" class="media-link">
+          <span class="material-symbols-outlined">open_in_new</span>
+          Open media
+        </a>
+      </article>
+      </div>
+
+      <div *ngIf="submissions.length === 0" class="empty-submissions">
+        <p>No submissions have been shared yet.</p>
+        <a routerLink="/tabs/contribute">Create the first submission</a>
+      </div>
+
+      <div *ngIf="submissions.length > 0 && filteredSubmissions.length === 0" class="empty-submissions">
+        <p>No submissions match "{{ searchTerm }}".</p>
+        <button type="button" class="clear-search-button" (click)="searchTerm = ''">Clear search</button>
+      </div>
+    </section>
+  </main>
+</ion-content>

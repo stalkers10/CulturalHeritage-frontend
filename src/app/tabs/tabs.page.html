@@ -1,4 +1,52 @@
-<ion-tabs>
+<ion-menu *ngIf="isAdmin" menuId="admin-menu" contentId="tabs-content" side="start" type="overlay">
+  <div class="admin-sidebar">
+    <div class="sidebar-header">
+      <span class="material-symbols-outlined sidebar-shield">admin_panel_settings</span>
+      <div>
+        <p class="sidebar-name">{{ adminName }}</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button
+        type="button"
+        class="sidebar-item"
+        [class.sidebar-item-active]="isAdminRouteActive('/tabs/admin/contributions')"
+        [attr.aria-current]="isAdminRouteActive('/tabs/admin/contributions') ? 'page' : null"
+        (click)="navigateTo('/tabs/admin/contributions')">
+        <span class="material-symbols-outlined">rate_review</span>
+        <span>Contributions</span>
+      </button>
+      <button
+        type="button"
+        class="sidebar-item"
+        [class.sidebar-item-active]="isAdminRouteActive('/tabs/admin/explore')"
+        [attr.aria-current]="isAdminRouteActive('/tabs/admin/explore') ? 'page' : null"
+        (click)="navigateTo('/tabs/admin/explore')">
+        <span class="material-symbols-outlined">add_location_alt</span>
+        <span>Add to Explore</span>
+      </button>
+      <button
+        type="button"
+        class="sidebar-item"
+        [class.sidebar-item-active]="isAdminRouteActive('/tabs/admin/events')"
+        [attr.aria-current]="isAdminRouteActive('/tabs/admin/events') ? 'page' : null"
+        (click)="navigateTo('/tabs/admin/events')">
+        <span class="material-symbols-outlined">event_available</span>
+        <span>Events</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button type="button" class="sidebar-close" (click)="closeMenu()">
+        <span class="material-symbols-outlined">close</span>
+        Close
+      </button>
+    </div>
+  </div>
+</ion-menu>
+
+<ion-tabs id="tabs-content">
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home" href="/tabs/home">
       <ion-icon aria-hidden="true" class="outline-icon" name="home-outline"></ion-icon>
@@ -23,7 +71,5 @@
       <ion-icon aria-hidden="true" class="active-icon" name="calendar"></ion-icon>
       <ion-label>Events</ion-label>
     </ion-tab-button>
-
   </ion-tab-bar>
-
 </ion-tabs>

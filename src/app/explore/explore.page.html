@@ -1,3 +1,89 @@
-<ion-content [fullscreen]="true">
-  <app-header></app-header>
+<ion-header *ngIf="exploreContent" class="app-page-header">
+  <app-header *ngIf="exploreContent" [title]="appTitle" [profileImageUrl]="profileImageUrl"></app-header>
+</ion-header>
+
+<ion-content class="explore-shell">
+  <div *ngIf="isLoading" class="explore-state">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="explore-state">
+    <p>{{ errorMessage }}</p>
+    <button type="button" class="retry-button" (click)="loadExploreContent()" aria-label="Retry">
+      <span class="material-symbols-outlined">refresh</span>
+    </button>
+  </div>
+
+  <main *ngIf="!isLoading && !errorMessage && exploreContent" class="explore-main">
+    <section *ngIf="heroSection as section" class="explore-hero">
+      <img *ngIf="heroItem?.imageUrl" [src]="resolveMediaUrl(heroItem?.imageUrl)" [alt]="heroItem?.title || section.title" />
+      <div class="hero-scrim"></div>
+
+      <div class="hero-content">
+        <span *ngIf="heroItem?.eyebrow" class="hero-eyebrow">{{ heroItem?.eyebrow }}</span>
+        <h2>{{ section.title }}</h2>
+        <p *ngIf="section.subtitle">{{ section.subtitle }}</p>
+
+        <form class="explore-search" role="search" (submit)="$event.preventDefault()">
+          <span class="material-symbols-outlined">search</span>
+          <input [(ngModel)]="searchTerm" name="exploreSearch" [placeholder]="searchPlaceholder" type="search" />
+        </form>
+      </div>
+    </section>
+
+    <section *ngIf="categorySection as section" class="category-section" [class.empty-section]="itemsForSection(section).length === 0">
+      <div class="category-grid">
+        <article
+          *ngFor="let item of itemsForSection(section); let itemIndex = index; trackBy: trackExploreItem"
+          class="category-card"
+          [class.category-wide]="itemIndex === 0 || itemIndex === 3"
+          [class.category-tall]="itemIndex > 1">
+          <img *ngIf="item.imageUrl" [src]="resolveMediaUrl(item.imageUrl)" [alt]="item.title" />
+          <div class="card-scrim"></div>
+
+          <div class="category-copy">
+            <span *ngIf="item.eyebrow" class="section-eyebrow">{{ item.eyebrow }}</span>
+            <h3>{{ item.title }}</h3>
+            <p *ngIf="item.description">{{ item.description }}</p>
+
+            <span *ngIf="item.actionLabel" class="inline-action">
+              <span *ngIf="item.icon" class="material-symbols-outlined">{{ item.icon }}</span>
+              {{ item.actionLabel }}
+            </span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section *ngIf="spotlightSection as section" class="spotlight-section" [class.empty-section]="itemsForSection(section).length === 0">
+      <div class="section-heading">
+        <div>
+          <span *ngIf="section.eyebrow" class="section-eyebrow">{{ section.eyebrow }}</span>
+          <h3>{{ section.title }}</h3>
+          <p *ngIf="section.subtitle">{{ section.subtitle }}</p>
+        </div>
+
+        <a *ngIf="section.actionLabel && section.actionRoute" [routerLink]="section.actionRoute">
+          {{ section.actionLabel }}
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+
+      <div class="spotlight-grid">
+        <article *ngFor="let item of itemsForSection(section); trackBy: trackExploreItem" class="spotlight-card">
+          <div *ngIf="item.imageUrl" class="spotlight-image">
+            <img [src]="resolveMediaUrl(item.imageUrl)" [alt]="item.title" />
+          </div>
+
+          <h4>{{ item.title }}</h4>
+          <p *ngIf="item.description">{{ item.description }}</p>
+
+          <div *ngIf="item.meta" class="spotlight-meta">
+            <span *ngIf="item.icon" class="material-symbols-outlined">{{ item.icon }}</span>
+            {{ item.meta }}
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
 </ion-content>

@@ -72,6 +72,15 @@ ion-toolbar {
   --border-style: none;
 }
 
+ion-header.app-page-header {
+  background: #12140e;
+  box-shadow: none;
+}
+
+ion-header.app-page-header::after {
+  display: none;
+}
+
 ion-title {
   font-family: var(--app-font-family);
   font-weight: 700;

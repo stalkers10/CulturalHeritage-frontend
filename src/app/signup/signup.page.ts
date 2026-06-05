@@ -17,13 +17,20 @@ export class SignupPage {
     fullName: '',
     email: '',
     password: '',
-    agreeTerms: false
+    agreeTerms: false,
+    role: 'user',
+    adminKey: ''
   };
   showPassword = false;
+  showAdminKey = false;
   isSubmitting = false;
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
+  }
+
+  toggleAdminKeyVisibility() {
+    this.showAdminKey = !this.showAdminKey;
   }
 
   onSignup() {
@@ -31,15 +38,25 @@ export class SignupPage {
       return;
     }
 
-    const signupData = {
+    const signupData: any = {
       fullName: this.signupData.fullName.trim(),
       email: this.signupData.email.trim().toLowerCase(),
       password: this.signupData.password,
-      agreeTerms: this.signupData.agreeTerms
+      agreeTerms: this.signupData.agreeTerms,
+      role: this.signupData.role
     };
+
+    if (this.signupData.role === 'admin') {
+      signupData.adminKey = this.signupData.adminKey.trim();
+    }
 
     if (!signupData.fullName || !signupData.email || !signupData.password || !signupData.agreeTerms) {
       alert('Please complete the form before continuing.');
+      return;
+    }
+
+    if (signupData.role === 'admin' && !signupData.adminKey) {
+      alert('Please enter the admin security key.');
       return;
     }
 

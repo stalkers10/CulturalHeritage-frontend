@@ -1,3 +1,174 @@
-<ion-content [fullscreen]="true">
+<ion-header class="app-page-header">
   <app-header></app-header>
+</ion-header>
+
+<ion-content class="profile-shell">
+  <main class="profile-main">
+    <section class="profile-hero">
+      <div class="avatar-wrap">
+        <div class="avatar-frame">
+          <div class="profile-avatar-large">
+            <img *ngIf="avatarDisplayUrl; else avatarInitials" [src]="avatarDisplayUrl" [alt]="profile?.name || 'Profile avatar'" />
+            <ng-template #avatarInitials>
+              <span>{{ initials }}</span>
+            </ng-template>
+          </div>
+
+          <button type="button" class="avatar-camera-button" (click)="avatarInput.click()" aria-label="Choose profile image">
+            <span class="material-symbols-outlined">photo_camera</span>
+          </button>
+        </div>
+
+        <input
+          #avatarInput
+          class="visually-hidden"
+          type="file"
+          accept="image/*"
+          (change)="onAvatarSelected($event)" />
+
+        <div *ngIf="selectedAvatarData" class="avatar-actions">
+          <button type="button" class="primary-button" [disabled]="isSavingAvatar" (click)="saveAvatar()">
+            <span class="material-symbols-outlined">upload</span>
+            {{ isSavingAvatar ? 'Saving...' : 'Save avatar' }}
+          </button>
+        </div>
+      </div>
+
+      <div class="profile-heading">
+        <span class="hero-kicker">My Account</span>
+        <h2>{{ profile?.name || 'Your profile' }}</h2>
+        <p>{{ profile?.email || 'Manage your personal details, avatar, security, and reminders.' }}</p>
+      </div>
+    </section>
+
+    <div *ngIf="isLoading" class="profile-state">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="profile-state">
+      <p>{{ errorMessage }}</p>
+      <button type="button" class="retry-button" (click)="loadProfile()" aria-label="Retry">
+        <span class="material-symbols-outlined">refresh</span>
+      </button>
+    </div>
+
+    <ng-container *ngIf="!isLoading && !errorMessage && profile">
+      <section class="stats-grid">
+        <article class="stat-tile">
+          <span class="material-symbols-outlined">history_edu</span>
+          <strong>{{ profile.stats.contributionCount }}</strong>
+          <small>Archive submissions</small>
+        </article>
+        <article class="stat-tile">
+          <span class="material-symbols-outlined">verified</span>
+          <strong>{{ profile.stats.approvedContributionCount }}</strong>
+          <small>Approved entries</small>
+        </article>
+        <article class="stat-tile">
+          <span class="material-symbols-outlined">notifications_active</span>
+          <strong>{{ profile.stats.upcomingReminderCount }}</strong>
+          <small>Upcoming reminders</small>
+        </article>
+      </section>
+
+      <section class="profile-layout">
+        <form class="profile-panel" (ngSubmit)="saveProfile()">
+          <div class="panel-heading">
+            <span class="material-symbols-outlined">badge</span>
+            <div>
+              <h3>Personal Information</h3>
+              <p>These details appear in your local account session.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label class="form-field">
+              <span>Full name</span>
+              <input [(ngModel)]="profileForm.name" name="name" type="text" autocomplete="name" />
+            </label>
+
+            <label class="form-field">
+              <span>Email</span>
+              <input [(ngModel)]="profileForm.email" name="email" type="email" autocomplete="email" />
+            </label>
+
+            <label class="form-field">
+              <span>Phone</span>
+              <input [(ngModel)]="profileForm.phone" name="phone" type="tel" autocomplete="tel" placeholder="+237..." />
+            </label>
+
+            <label class="form-field">
+              <span>Location</span>
+              <input [(ngModel)]="profileForm.location" name="location" type="text" placeholder="City or region" />
+            </label>
+          </div>
+
+          <label class="form-field">
+            <span>Bio</span>
+            <textarea [(ngModel)]="profileForm.bio" name="bio" rows="4" maxlength="600" placeholder="Add a short cultural interest, role, or note..."></textarea>
+          </label>
+
+          <button class="primary-button full-button" type="submit" [disabled]="isSavingProfile">
+            <span class="material-symbols-outlined">save</span>
+            {{ isSavingProfile ? 'Saving...' : 'Save profile' }}
+          </button>
+        </form>
+
+        <aside class="profile-side">
+          <form class="profile-panel" (ngSubmit)="changePassword()">
+            <div class="panel-heading">
+              <span class="material-symbols-outlined">lock</span>
+              <div>
+                <h3>Security</h3>
+                <p>Change your password with your current password.</p>
+              </div>
+            </div>
+
+            <label class="form-field">
+              <span>Current password</span>
+              <input [(ngModel)]="passwordForm.currentPassword" name="currentPassword" type="password" autocomplete="current-password" />
+            </label>
+
+            <label class="form-field">
+              <span>New password</span>
+              <input [(ngModel)]="passwordForm.newPassword" name="newPassword" type="password" autocomplete="new-password" />
+            </label>
+
+            <label class="form-field">
+              <span>Confirm new password</span>
+              <input [(ngModel)]="passwordForm.confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" />
+            </label>
+
+            <button class="primary-button full-button" type="submit" [disabled]="isChangingPassword">
+              <span class="material-symbols-outlined">key</span>
+              {{ isChangingPassword ? 'Updating...' : 'Change password' }}
+            </button>
+          </form>
+
+          <section class="profile-panel quick-panel">
+            <div class="panel-heading">
+              <span class="material-symbols-outlined">settings</span>
+              <div>
+                <h3>Account Tools</h3>
+                <p>Useful shortcuts for your account activity.</p>
+              </div>
+            </div>
+
+            <a routerLink="/tabs/submissions" class="tool-link">
+              <span class="material-symbols-outlined">inventory_2</span>
+              View submissions
+            </a>
+            <a routerLink="/tabs/events" class="tool-link">
+              <span class="material-symbols-outlined">event</span>
+              Event reminders
+            </a>
+            <button type="button" class="danger-button" (click)="logout()">
+              <span class="material-symbols-outlined">logout</span>
+              Log out
+            </button>
+          </section>
+        </aside>
+      </section>
+    </ng-container>
+  </main>
 </ion-content>

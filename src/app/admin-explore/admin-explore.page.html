@@ -1,0 +1,121 @@
+<ion-header class="app-page-header">
+  <app-header title="Add to Explore"></app-header>
+</ion-header>
+
+<ion-content class="admin-shell">
+  <main class="admin-main">
+    <section class="admin-hero">
+      <h2>Add Explore Item</h2>
+      <p>Publish a new cultural item to the Explore page. It will also appear first in Trending on the Home page.</p>
+    </section>
+
+    <div *ngIf="isSectionsLoading" class="admin-state">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <div *ngIf="!isSectionsLoading && errorMessage && sections.length === 0" class="admin-state">
+      <span class="material-symbols-outlined state-icon">error_outline</span>
+      <p>{{ errorMessage }}</p>
+      <button type="button" class="retry-btn" (click)="loadSections()">
+        <span class="material-symbols-outlined">refresh</span>
+        Retry
+      </button>
+    </div>
+
+    <form
+      *ngIf="!isSectionsLoading && sections.length > 0"
+      class="explore-form"
+      (ngSubmit)="submit()">
+
+      <div *ngIf="errorMessage" class="form-error-banner">
+        <span class="material-symbols-outlined">error_outline</span>
+        {{ errorMessage }}
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="section">Section <span class="required">*</span></label>
+        <div class="select-wrap">
+          <select id="section" [(ngModel)]="form.sectionKey" name="section" class="field-select" required>
+            <option *ngFor="let s of sections" [value]="s.key">{{ s.title }}</option>
+          </select>
+          <span class="material-symbols-outlined select-icon">expand_more</span>
+        </div>
+        <p class="field-hint">The Explore section this item will appear in.</p>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="title">Title <span class="required">*</span></label>
+        <input
+          id="title"
+          [(ngModel)]="form.title"
+          name="title"
+          type="text"
+          class="field-input"
+          placeholder="e.g. Bafut Palace"
+          required />
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="eyebrow">Eyebrow label</label>
+        <input
+          id="eyebrow"
+          [(ngModel)]="form.eyebrow"
+          name="eyebrow"
+          type="text"
+          class="field-input"
+          placeholder="e.g. North West Region" />
+        <p class="field-hint">Small label shown above the title.</p>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="imageUrl">Image URL</label>
+        <input
+          id="imageUrl"
+          [(ngModel)]="form.imageUrl"
+          name="imageUrl"
+          type="url"
+          class="field-input"
+          placeholder="https://…" />
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="actionRoute">Action route</label>
+        <input
+          id="actionRoute"
+          [(ngModel)]="form.actionRoute"
+          name="actionRoute"
+          type="text"
+          class="field-input"
+          placeholder="/tabs/explore" />
+        <p class="field-hint">Where the card links to when tapped (optional).</p>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="button"
+          class="action-btn action-secondary"
+          [disabled]="isSaving"
+          (click)="resetForm()">
+          Reset
+        </button>
+        <button
+          type="submit"
+          class="action-btn action-primary"
+          [disabled]="isSaving || !form.sectionKey || !form.title.trim()">
+          <ion-spinner *ngIf="isSaving" name="crescent" class="btn-spinner"></ion-spinner>
+          <span *ngIf="!isSaving" class="material-symbols-outlined">add_circle</span>
+          Publish Item
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <ion-toast
+    [isOpen]="showToast"
+    [message]="toastMessage"
+    [color]="toastColor"
+    duration="2800"
+    position="bottom"
+    (didDismiss)="dismissToast()">
+  </ion-toast>
+</ion-content>

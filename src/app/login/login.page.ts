@@ -82,6 +82,6 @@ export class LoginPage {
   }
 
   onForgotPassword() {
-    console.log('Forgot password clicked');
+    this.router.navigate(['/forgot-password']);
   }
 }

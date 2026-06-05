@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface PendingOtpContext {
@@ -13,6 +13,8 @@ export interface AuthUser {
   id: string;
   email: string;
   name: string;
+  role?: string;
+  avatarUrl?: string | null;
 }
 
 export interface AuthSession {
@@ -58,6 +60,168 @@ export interface HomeContent {
   sections: HomeSection[];
 }
 
+export interface ExploreSettings {
+  appTitle?: string;
+  searchPlaceholder?: string;
+  profileImageUrl?: string;
+}
+
+export interface ExploreItem {
+  id: number;
+  sectionKey: string;
+  eyebrow: string | null;
+  title: string;
+  subtitle: string | null;
+  description: string | null;
+  meta: string | null;
+  imageUrl: string | null;
+  icon: string | null;
+  actionLabel: string | null;
+  actionRoute: string | null;
+  sortOrder: number;
+}
+
+export interface ExploreSection {
+  key: string;
+  eyebrow: string | null;
+  title: string;
+  subtitle: string | null;
+  actionLabel: string | null;
+  actionRoute: string | null;
+  layout: string;
+  sortOrder: number;
+  items: ExploreItem[];
+}
+
+export interface ExploreContent {
+  status: string;
+  settings: ExploreSettings;
+  sections: ExploreSection[];
+}
+
+export interface Contribution {
+  id: number;
+  tribe: string;
+  story: string;
+  media_type: 'none' | 'photo' | 'audio' | 'video' | string;
+  status: string;
+  created_at: string;
+  media_url?: string | null;
+  media_name?: string | null;
+  media_mime_type?: string | null;
+}
+
+export interface HeritageEvent {
+  id: number;
+  title: string;
+  category: string;
+  region: string;
+  city: string;
+  venue: string;
+  description: string;
+  eventDate: string;
+  endDate: string | null;
+  imageUrl: string | null;
+  organizer: string | null;
+  priceLabel: string | null;
+  mapUrl: string | null;
+  isFeatured: boolean;
+  status?: string;
+}
+
+export interface EventsResponse {
+  status: string;
+  events: HeritageEvent[];
+}
+
+export interface EventSubmissionRequest {
+  title: string;
+  category: string;
+  region: string;
+  city: string;
+  venue: string;
+  description: string;
+  eventDate: string;
+  endDate?: string;
+  imageUrl?: string;
+  organizer?: string;
+  priceLabel?: string;
+  mapUrl?: string;
+}
+
+export interface EventSubmissionResponse {
+  status: string;
+  message: string;
+  eventId: number;
+  reviewStatus: 'Approved' | 'Pending';
+  event: HeritageEvent | null;
+}
+
+export interface EventReminder {
+  id: number;
+  eventId: number;
+  remindAt: string;
+  reminderOffsetMinutes: number;
+  notificationId: number;
+  eventTitle: string;
+  eventDate: string;
+}
+
+export interface EventRemindersResponse {
+  status: string;
+  reminders: EventReminder[];
+}
+
+export interface SaveEventReminderRequest {
+  eventId: number;
+  remindAt: string;
+  reminderOffsetMinutes: number;
+  notificationId: number;
+}
+
+export interface SaveEventReminderResponse {
+  status: string;
+  message: string;
+  reminder: EventReminder;
+}
+
+export interface UserProfileStats {
+  contributionCount: number;
+  approvedContributionCount: number;
+  reminderCount: number;
+  upcomingReminderCount: number;
+}
+
+export interface UserProfile {
+  id: string;
+  email: string;
+  name: string;
+  avatarUrl: string | null;
+  phone: string;
+  location: string;
+  bio: string;
+  stats: UserProfileStats;
+}
+
+export interface ProfileResponse {
+  status: string;
+  profile: UserProfile;
+}
+
+export interface ProfileUpdateResponse extends ProfileResponse {
+  message: string;
+  token: string;
+  user: AuthUser;
+}
+
+export interface ProfileUpdateRequest {
+  name: string;
+  email: string;
+  phone: string;
+  location: string;
+  bio: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -66,6 +230,7 @@ export class ApiService {
   private readonly baseUrl = this.resolveApiBaseUrl();
   private readonly pendingOtpStorageKey = 'pendingOtpContext';
   private readonly authStorageKey = 'authSession';
+  private readonly resetTokenStorageKey = 'resetToken';
 
   get apiBaseUrl(): string {
     return this.baseUrl;
@@ -87,6 +252,10 @@ export class ApiService {
     return this.http.get<HomeContent>(`${this.baseUrl}/api/home`);
   }
 
+  getExploreContent(): Observable<ExploreContent> {
+    return this.http.get<ExploreContent>(`${this.baseUrl}/api/explore`);
+  }
+
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/login`, credentials);
   }
@@ -99,8 +268,126 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/api/verify-otp`, otpData);
   }
 
-  getContributions(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/api/contributions`);
+  isAdmin(): boolean {
+    return this.getAuthSession()?.user?.role === 'admin';
+  }
+
+  getAdminContributions(): Observable<Contribution[]> {
+    return this.http.get<{ status: string; contributions: Contribution[] }>(`${this.baseUrl}/api/admin/contributions`, {
+      headers: this.getAuthHeaders()
+    }).pipe(
+      map((response) => response.contributions || [])
+    );
+  }
+
+  updateContributionStatus(id: number, status: 'Approved' | 'Rejected'): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/api/admin/contributions/${id}`, { status }, { headers: this.getAuthHeaders() });
+  }
+
+  getAdminEvents(): Observable<HeritageEvent[]> {
+    return this.http.get<{ status: string; events: HeritageEvent[] }>(`${this.baseUrl}/api/admin/events`, {
+      headers: this.getAuthHeaders()
+    }).pipe(
+      map((response) => response.events || [])
+    );
+  }
+
+  updateEventStatus(id: number, status: 'Approved' | 'Rejected'): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/api/admin/events/${id}`, { status }, { headers: this.getAuthHeaders() });
+  }
+
+  getAdminExploreSections(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/admin/explore-sections`, { headers: this.getAuthHeaders() });
+  }
+
+  addExploreItem(item: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/admin/explore-items`, item, { headers: this.getAuthHeaders() });
+  }
+
+  forgotPassword(identity: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/forgot-password`, { identity });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/reset-password`, { token, newPassword });
+  }
+
+  setResetToken(token: string): void {
+    if (typeof window === 'undefined') return;
+    sessionStorage.setItem(this.resetTokenStorageKey, token);
+  }
+
+  getResetToken(): string | null {
+    if (typeof window === 'undefined') return null;
+    return sessionStorage.getItem(this.resetTokenStorageKey);
+  }
+
+  clearResetToken(): void {
+    if (typeof window === 'undefined') return;
+    sessionStorage.removeItem(this.resetTokenStorageKey);
+  }
+
+  getContributions(): Observable<Contribution[]> {
+    return this.http.get<Contribution[]>(`${this.baseUrl}/api/contributions`);
+  }
+
+  getProfile(): Observable<ProfileResponse> {
+    return this.http.get<ProfileResponse>(`${this.baseUrl}/api/profile`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  updateProfile(profile: ProfileUpdateRequest): Observable<ProfileUpdateResponse> {
+    return this.http.patch<ProfileUpdateResponse>(`${this.baseUrl}/api/profile`, profile, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  updateProfileAvatar(avatar: {
+    mediaData: string;
+    mediaName: string;
+    mediaMimeType: string;
+  }): Observable<ProfileUpdateResponse> {
+    return this.http.post<ProfileUpdateResponse>(`${this.baseUrl}/api/profile/avatar`, avatar, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  changeProfilePassword(passwords: {
+    currentPassword: string;
+    newPassword: string;
+  }): Observable<{ status: string; message: string }> {
+    return this.http.patch<{ status: string; message: string }>(`${this.baseUrl}/api/profile/password`, passwords, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  getEvents(): Observable<EventsResponse> {
+    return this.http.get<EventsResponse>(`${this.baseUrl}/api/events`);
+  }
+
+  submitEvent(event: EventSubmissionRequest): Observable<EventSubmissionResponse> {
+    return this.http.post<EventSubmissionResponse>(`${this.baseUrl}/api/events`, event, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  getEventReminders(): Observable<EventRemindersResponse> {
+    return this.http.get<EventRemindersResponse>(`${this.baseUrl}/api/event-reminders`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  saveEventReminder(reminder: SaveEventReminderRequest): Observable<SaveEventReminderResponse> {
+    return this.http.post<SaveEventReminderResponse>(`${this.baseUrl}/api/event-reminders`, reminder, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  deleteEventReminder(reminderId: number): Observable<{ status: string; message: string }> {
+    return this.http.delete<{ status: string; message: string }>(`${this.baseUrl}/api/event-reminders/${reminderId}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   submitContribution(contribution: any): Observable<any> {
@@ -180,7 +467,8 @@ export class ApiService {
       return;
     }
 
-    sessionStorage.setItem(this.authStorageKey, JSON.stringify(session));
+    localStorage.setItem(this.authStorageKey, JSON.stringify(session));
+    window.dispatchEvent(new CustomEvent('authSessionChanged', { detail: session }));
   }
 
   getAuthSession(): AuthSession | null {
@@ -188,7 +476,7 @@ export class ApiService {
       return null;
     }
 
-    const storedSession = sessionStorage.getItem(this.authStorageKey);
+    const storedSession = localStorage.getItem(this.authStorageKey);
 
     if (!storedSession) {
       return null;
@@ -197,7 +485,7 @@ export class ApiService {
     try {
       return JSON.parse(storedSession) as AuthSession;
     } catch {
-      sessionStorage.removeItem(this.authStorageKey);
+      localStorage.removeItem(this.authStorageKey);
       return null;
     }
   }
@@ -207,7 +495,8 @@ export class ApiService {
       return;
     }
 
-    sessionStorage.removeItem(this.authStorageKey);
+    localStorage.removeItem(this.authStorageKey);
+    window.dispatchEvent(new CustomEvent('authSessionChanged'));
   }
 
   isAuthenticated(): boolean {

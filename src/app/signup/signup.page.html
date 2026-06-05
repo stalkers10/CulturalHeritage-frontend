@@ -65,6 +65,36 @@
             </ion-item>
           </div>
 
+          <div class="input-group">
+            <label class="field-label">Account Type</label>
+            <ion-item lines="none" class="custom-input">
+              <span class="material-symbols-outlined" slot="start">manage_accounts</span>
+              <select
+                [(ngModel)]="signupData.role"
+                name="role"
+                class="role-select">
+                <option value="user">Community Member</option>
+                <option value="admin">Administrator</option>
+              </select>
+            </ion-item>
+          </div>
+
+          <div class="input-group" *ngIf="signupData.role === 'admin'">
+            <label class="field-label">Admin Security Key</label>
+            <ion-item lines="none" class="custom-input admin-key-input">
+              <span class="material-symbols-outlined" slot="start">shield_lock</span>
+              <ion-input
+                [type]="showAdminKey ? 'text' : 'password'"
+                placeholder="Enter security key"
+                [(ngModel)]="signupData.adminKey"
+                name="adminKey">
+              </ion-input>
+              <ion-button type="button" fill="clear" slot="end" class="view-password" (click)="toggleAdminKeyVisibility()">
+                <span class="material-symbols-outlined">{{ showAdminKey ? 'visibility_off' : 'visibility' }}</span>
+              </ion-button>
+            </ion-item>
+          </div>
+
           <div class="terms-group">
             <ion-item lines="none" class="terms-item">
               <ion-checkbox slot="start" [(ngModel)]="signupData.agreeTerms" name="agreeTerms" required></ion-checkbox>

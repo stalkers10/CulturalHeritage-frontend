@@ -1,3 +1,125 @@
+ion-menu {
+  --width: 280px;
+  --background: #12140e;
+}
+
+.admin-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: calc(env(safe-area-inset-top) + 24px) 0 calc(env(safe-area-inset-bottom) + 24px);
+  background: #12140e;
+  border-right: 1px solid rgba(233, 195, 73, 0.1);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 24px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sidebar-shield {
+  color: #e9c349;
+  font-size: 2rem;
+  flex: 0 0 auto;
+}
+
+.sidebar-role {
+  margin: 0 0 2px;
+  color: #e9c349;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.sidebar-name {
+  margin: 0;
+  color: #e3e3d9;
+  font-size: 0.9rem;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 12px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #c3c8c1;
+  font-family: var(--app-font-family);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-align: left;
+  transition: background 160ms ease, color 160ms ease;
+
+  .material-symbols-outlined {
+    color: #e9c349;
+    font-size: 1.3rem;
+    flex: 0 0 auto;
+  }
+
+  &:hover, &:active {
+    background: rgba(233, 195, 73, 0.08);
+    color: #e3e3d9;
+  }
+}
+
+.sidebar-item-active {
+  background: rgba(233, 195, 73, 0.14);
+  color: #fff4c2;
+}
+
+.sidebar-item-active .material-symbols-outlined {
+  font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24;
+}
+
+.sidebar-footer {
+  padding: 0 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 16px;
+}
+
+.sidebar-close {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: transparent;
+  color: #92998f;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: left;
+  transition: background 160ms ease;
+
+  .material-symbols-outlined {
+    font-size: 1.1rem;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+}
 
 :host {
   --tabs-active: #e9c349;
@@ -38,7 +160,7 @@ ion-tab-button::before {
   top: -3px;
   left: 50%;
   width: 50px;
-  height: 3.5px;
+  height: 3px;
   border-radius: 0 0 999px 999px;
   background: var(--tabs-active);
   content: "";
